@@ -2,7 +2,7 @@ import React from "react";
 
 const Post = () => {
   return (
-    <div className='posts container bg-white max-w-[1400px]'>
+    <div className='posts container bg-white max-w-[1400px] border-2 border-red-400 rounded-md'>
       <div className='post-detail'>
         <p className='username text'>Ace</p>
         <p className='time text'>
