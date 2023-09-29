@@ -1,9 +1,13 @@
 import React from "react";
-import Post from "../Components/Post";
+import Navbar from "../Components/Navbar";
+import Posts from "../Components/Posts";
 
 const Feed = () => {
   return (
-    <Post />
+    <div>
+      <Navbar />
+      <Posts />
+    </div>
   );
 };
 

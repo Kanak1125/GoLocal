@@ -2,6 +2,7 @@ import {useState, useRef } from 'react'
 import CenteredContainer from './CenteredContainer';
 import axios from 'axios';
 import { Alert } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
 
 const Signup = () => {
     const emailRef = useRef();
@@ -11,6 +12,7 @@ const Signup = () => {
     const lastNameRef = useRef();
     const userNameRef = useRef();
     const [error, setError] = useState();
+    const navigate = useNavigate();
 
     function handleSubmit(e) {
         e.preventDefault();
@@ -31,7 +33,10 @@ const Signup = () => {
           last_name: lastNameRef.current.value,
         }
        })
-       .then(() => console.log("Signup successful"))
+       .then(() => {
+        console.log("Signup successful");
+        navigate("/");
+       })
        .catch((err) => console.log(`Error: ${err}`));
     }
   return (
@@ -47,6 +52,7 @@ const Signup = () => {
               id='firstName'
               className='border-2 border-white-400 rounded outline-none px-2 py-1'
               ref={firstNameRef}
+              required
             />
           </div>
           <div className='flex flex-col'>
@@ -56,6 +62,7 @@ const Signup = () => {
               id='lastName'
               className='border-2 border-white-400 rounded outline-none px-2 py-1'
               ref={lastNameRef}
+              required
             />
           </div>
         </div>
@@ -65,6 +72,7 @@ const Signup = () => {
           id='userName'
           className='border-2 border-white-400 rounded outline-none px-2 py-1'
           ref={userNameRef}
+          required
         />
         <label htmlFor="email" className='mt-5 mb-2'>Email: </label>
         <input 
@@ -72,6 +80,7 @@ const Signup = () => {
           id='email'
           className='border-2 border-white-400 rounded outline-none px-2 py-1'
           ref={emailRef}
+          required
         />
         <label htmlFor="password" className='mt-5 mb-2'>Password: </label>
         <input 
@@ -79,6 +88,7 @@ const Signup = () => {
           id='password'
           className='border-2 border-white-400 rounded outline-none px-2 py-1' 
           ref={passwordRef}
+          required
         />
         <label htmlFor="confirmPassword" className='mt-5 mb-2'>Confirm Password: </label>
         <input 
@@ -86,11 +96,12 @@ const Signup = () => {
           id='confirmPassword'
           className='border-2 border-white-400 rounded outline-none px-2 py-1' 
           ref={confirmPasswordRef}
+          required
         />
         <input type="submit" value="Sign Up" className='accent-color text-white rounded text-sm py-2 my-5 cursor-pointer'/>
-        <a href="" className='text-center text-sm accent-text-color'>Forgot Password?</a>
+        <a href="/forgot-password" className='text-center text-sm accent-text-color'>Forgot Password?</a>
       </form>
-      <div>Need an account? <a href="" className='accent-text-color'>Log In</a></div>
+      <div>Already has an account? <a href="/login" className='accent-text-color'>Log In</a></div>
     </CenteredContainer>
   )
 }
