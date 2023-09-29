@@ -1,7 +1,10 @@
 import React from "react";
+import Post from "../Components/Post";
 
 const Feed = () => {
-  return <div>Feed</div>;
+  return (
+    <Post />
+  );
 };
 
 export default Feed;

@@ -16,6 +16,7 @@ npm install
 - npm install react-icons --save
 - npm i axios
 - npm i react-router-dom
+- npm i bootstrap react-bootstrap
 
 ### python commands
 - pip install django
