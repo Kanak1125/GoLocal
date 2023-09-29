@@ -6,6 +6,10 @@ from django.contrib.auth.models import User
 #     id = models.UUIDField(default=uuid.uuid4, unique=True, primary_key=True, editable=False)
 #     user = models.OneToOneField(User, on_delete=models.CASCADE, null=True, blank=True)
 
+class ExtendUser(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    profile_picture = models.ImageField(upload_to='profile_pictures', blank=True, null=True)
+    loaction = models.CharField(max_length=500, blank=True, null=True)
 class Post(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
     description = models.TextField(max_length=1000, blank=True)
