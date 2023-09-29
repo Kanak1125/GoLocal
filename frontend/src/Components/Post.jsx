@@ -1,7 +1,7 @@
 import React from "react";
 
 const Post = () => {
-  return;
+  return (
   <div className='posts container bg-white'>
     <div className='post-detail'>
       <p className='username text'>Ace</p>
@@ -29,7 +29,8 @@ const Post = () => {
         </div>
       </div>
     </div>
-  </div>;
+  </div>
+  )
 };
 
 export default Post;
