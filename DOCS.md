@@ -16,12 +16,14 @@ npm install
 - npm install react-icons --save
 - npm i axios
 - npm i react-router-dom
+- npm i bootstrap react-bootstrap
 
 ### python commands
 - pip install django
 - pip install djangorestframework
 - python -m pip install django-cors-headers
 - pip install djangorestframework-simplejwt
+- pip install argon2-cffi
 
 ## api urls
 - http://127.0.0.1:8000/api/user-create/

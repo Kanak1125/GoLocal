@@ -1,3 +1,29 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer utilities {
+    /* for buttons */
+    .accent-color {
+        background-color: hsl(188, 62%, 43%);
+        color: white;
+    }
+    .accent-color:hover {
+        background-color: hsl(188, 62%, 40%);
+    }
+    .accent-text-color {
+        color: hsl(188, 62%, 40%);
+    }
+    /* bg colors */
+    .primary-bg-color {
+        background: white;
+    }
+
+    
+    .secondary-color {
+        background-color: hsl(160, 44%, 72%);
+    }
+    .ternary-color {
+        background-color: hsl(138, 100%, 93%);
+    }
+}
