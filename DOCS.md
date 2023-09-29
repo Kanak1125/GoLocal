@@ -21,3 +21,8 @@ npm install
 - pip install django
 - pip install djangorestframework
 - python -m pip install django-cors-headers
+- pip install djangorestframework-simplejwt
+
+## api urls
+- http://127.0.0.1:8000/api/user-create/
+- http://127.0.0.1:8000/api/user-list/
