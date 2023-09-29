@@ -99,9 +99,9 @@ const Signup = () => {
           required
         />
         <input type="submit" value="Sign Up" className='accent-color text-white rounded text-sm py-2 my-5 cursor-pointer'/>
-        <a href="" className='text-center text-sm accent-text-color'>Forgot Password?</a>
+        <a href="/forgot-password" className='text-center text-sm accent-text-color'>Forgot Password?</a>
       </form>
-      <div>Need an account? <a href="" className='accent-text-color'>Log In</a></div>
+      <div>Already has an account? <a href="/login" className='accent-text-color'>Log In</a></div>
     </CenteredContainer>
   )
 }
