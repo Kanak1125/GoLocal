@@ -17,6 +17,7 @@ npm install
 - npm i axios
 - npm i react-router-dom
 - npm i bootstrap react-bootstrap
+- npm i swiper
 
 ### python commands
 - pip install django
