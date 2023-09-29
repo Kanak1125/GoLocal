@@ -9,6 +9,7 @@ djangorestframework = "*"
 django-cors-headers = "*"
 djangorestframework-simplejwt = "*"
 mysqlclient = "*"
+argon2-cffi = "*"
 
 [dev-packages]
 

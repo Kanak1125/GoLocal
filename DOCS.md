@@ -23,6 +23,7 @@ npm install
 - pip install djangorestframework
 - python -m pip install django-cors-headers
 - pip install djangorestframework-simplejwt
+- pip install argon2-cffi
 
 ## api urls
 - http://127.0.0.1:8000/api/user-create/
