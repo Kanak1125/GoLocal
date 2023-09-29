@@ -30,9 +30,9 @@ function App() {
           {/* <Route element={<PrivateRoute componentToRender={<UpdateProfile />}/>}>
             <Route path='/update-profile' element={<UpdateProfile />} />
           </Route> */}
-          <Route element={<PrivateRoute componentToRender={<Feed />}/>}>
+          {/* <Route element={<PrivateRoute componentToRender={<Feed />}/>}> */}
             <Route path='/' element={<Feed />}/>
-          </Route>
+          {/* </Route> */}
         </Routes>
       </AuthProvider>
     </BrowserRouter>
