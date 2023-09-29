@@ -1,12 +1,12 @@
-// import { useAuthContext } from '../../contexts/AuthContext'
-// import { Navigate } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
+import { useAuthContext } from '../context/AuthContext';
 
 const PrivateRoute2 = ({componentToRender}) => {
-    // const { currentUser } = useAuthContext();
+    const { currentUser } = useAuthContext();
 
-    // if (currentUser) {
-    //     return <Navigate to="/" />
-    // };
+    if (currentUser) {
+        return <Navigate to="/" />
+    };
 
     return componentToRender
 }

@@ -1,15 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
+import PostModal from "./PostModal";
 
 const Post = () => {
-  function openModal() {
-    return {};
-  }
+  const [open, setOpen] = useState(false);
+  
+
   return (
     <div>
-      <input
-        type='text'
-        placeholder='Post Your destination'
-        onClick={openModal}
+      <button onClick={() => setOpen(true)}>Post</button>
+      <PostModal 
+        open={open}
+        setOpen={setOpen}
       />
     </div>
   );
