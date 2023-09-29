@@ -1,6 +1,6 @@
 # Dependencies to install
 
-## Cmd location: ./frontend-todo/
+## Cmd location: ./frontend/
 
 ### Install node modules
 npm install
@@ -10,3 +10,8 @@ npm install
 - npx tailwindcss init
 - npm install react-scripts@latest
 - npx tailwindcss init -p
+- npm install prettier-plugin-tailwindcss
+
+### others
+- npm install react-icons --save
+- npm i axios
