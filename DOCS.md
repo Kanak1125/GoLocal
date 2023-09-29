@@ -15,3 +15,9 @@ npm install
 ### others
 - npm install react-icons --save
 - npm i axios
+- npm i react-router-dom
+
+### python commands
+- pip install django
+- pip install djangorestframework
+- python -m pip install django-cors-headers
