@@ -44,7 +44,7 @@ const Post = () => {
                   name='location'
                 />
               </label>
-              <div className='map'>
+              <div className='map mt-3'>
                 <button
                   onClick={(e) => handleClick(e)}
                   className='accent-color text-white font-bold py-2 px-4 rounded-full transition-all duration-300'
@@ -111,12 +111,12 @@ const Post = () => {
             />
           </form>
         </div>
+        {buttonClicked && (
+          <div>
+            <WebMap />
+          </div>
+        )}
       </div>
-      {buttonClicked && (
-        <div>
-          <WebMap />
-        </div>
-      )}
     </div>
   );
 };
