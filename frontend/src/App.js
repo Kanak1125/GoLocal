@@ -7,6 +7,7 @@ import Login from "./authentication/Login";
 import Feed from "./Pages/Feed";
 import ForgotPassword from "./authentication/ForgotPassword";
 import AuthProvider from "./context/AuthContext";
+import Post from "./Pages/Post";
 
 function App() {
   return (
