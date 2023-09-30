@@ -29,7 +29,6 @@ const Post = () => {
   return (
     <div className=' min-h-screen flex items-center justify-center w-full'>
       <div className='container'>
-        <h3>Post</h3>
         <div className='location-accessbility'>
           <form>
             <div className='loaction-name'>

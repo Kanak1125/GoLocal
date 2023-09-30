@@ -23,12 +23,12 @@ const Navbar = () => {
   }
   return (
     <div className='container max-w-[1400px] py-2 mx-auto bg-white'>
-      <nav className='nav-container flex justify-around'>
-        <Link to='/' className='logo w-20  m-2 text-white'>
+      <nav className='nav-container flex justify-around border-2 border-blue-600'>
+        <Link to='/' className='logo w-20  m-2 text-white hidden md:block'>
           <img src={Logo} alt='logo-img' />
         </Link>
         <div className='nav-links flex items-center'>
-          <Link to={'/'}>
+          <Link to={'/'} className="hidden md:block">
             <FaHome size={24} />
           </Link>
           <Search searchHandler={handleChange} searchInput={searchInput} />

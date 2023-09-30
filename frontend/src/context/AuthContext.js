@@ -16,21 +16,33 @@ export default function AuthProvider({ children }) {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState("");
 
-    useEffect(() => {
-        async function getApi() {
-            await axios({
-                method: "post",
-                url: "http://127.0.0.1:8000/api/getUsername/",
-                data: {
-                    username: currentUser,
-                }
-            })
-            .then(() => console.log("Username successfully posted..."))
-            .catch((err) => console.error(`ERROR: ${err}`));
-        }
+    // useEffect(() => {
+    //     async function getApi() {
+    //         await axios({
+    //             method: "post",
+    //             url: "http://127.0.0.1:8000/api/getUsername/",
+    //             data: {
+    //                 username: currentUser,
+    //             }
+    //         })
+    //         .then(() => console.log("Username successfully posted..."))
+    //         .catch((err) => console.error(`ERROR: ${err}`));
+    //     }
 
-        getApi();
-    }, [currentUser]);
+    //     getApi();
+    // }, [currentUser]);
+
+    function postUserToSession() {
+        axios({
+            method: "post",
+            url: "http://127.0.0.1:8000/api/getUsername/",
+            data: {
+                "username": currentUser,
+            }
+        })
+        .then(() => console.log("Username successfully posted..."))
+        .catch((err) => console.error(`ERROR: ${err}`));
+    }
 
     let login = async (username, password) => {
         setError("");
@@ -53,6 +65,7 @@ export default function AuthProvider({ children }) {
                 console.error("Alert something went wrong");
             }
             console.log(data);
+            postUserToSession();
             setLoading(false);
         } catch (err) {
             setError("Login failed!");
