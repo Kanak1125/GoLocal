@@ -30,6 +30,7 @@ npm install
 - python -m pip install django-cors-headers
 - pip install djangorestframework-simplejwt
 - pip install argon2-cffi
+- npm i react-leaflet
 
 ## api urls
 
