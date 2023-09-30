@@ -33,7 +33,7 @@ const Feed = () => {
           Post
         </button>
       </div>
-      <main className='flex'>
+      <main className='flex my-8'>
         <Posts open={open} openModal={openModal} closeModal={closeModal} />
         <Sidebar />
       </main>
