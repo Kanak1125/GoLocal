@@ -16,21 +16,21 @@ export default function AuthProvider({ children }) {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState("");
 
-    // useEffect(() => {
-    //     async function getApi() {
-    //         const response = await axios({
-    //             method: "get",
-    //             url: "http://127.0.0.1:8000/api/token/",
-    //         })
-    
-    //         const data = await response.data;
-    //         // console.log(data);
-    //         setCurrentUser(data);
-    //     }
+    useEffect(() => {
+        async function getApi() {
+            await axios({
+                method: "post",
+                url: "http://127.0.0.1:8000/api/getUsername/",
+                data: {
+                    username: currentUser,
+                }
+            })
+            .then(() => console.log("Username successfully posted..."))
+            .catch((err) => console.error(`ERROR: ${err}`));
+        }
 
-    //     getApi();
-
-    // }, []);
+        getApi();
+    }, [currentUser]);
 
     let login = async (username, password) => {
         setError("");
