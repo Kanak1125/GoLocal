@@ -41,7 +41,7 @@ function LocationMarker() {
     // })
     const map = useMap(); // use the useMap hook to access the map instance
     useMapEvents({ // use the useMapEvents hook to handle map events
-      click() {
+      mouseover() {
         map.locate();
       },
       locationfound(e) { // handle the location found event
