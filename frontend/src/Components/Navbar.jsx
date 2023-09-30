@@ -22,13 +22,15 @@ const Navbar = () => {
     logout();
   }
   return (
-    <div className='container max-w-[1400px] my-2 mx-auto'>
+    <div className='container max-w-[1400px] py-2 mx-auto bg-white'>
       <nav className='nav-container flex justify-around'>
-        <div className='logo w-20  m-2 text-white'>
+        <Link to='/' className='logo w-20  m-2 text-white'>
           <img src={Logo} alt='logo-img' />
-        </div>
+        </Link>
         <div className='nav-links flex items-center'>
-          <FaHome />
+          <Link to={'/'}>
+            <FaHome size={24} />
+          </Link>
           <Search searchHandler={handleChange} searchInput={searchInput} />
         </div>
         <div className='nav-right flex items-center'>
