@@ -1,10 +1,16 @@
 from django.shortcuts import render
 from rest_framework import status
 
-from rest_framework.decorators import api_view, parser_classes
+from rest_framework.decorators import api_view, parser_classes, permission_classes
 from rest_framework.parsers import MultiPartParser, FormParser
 from rest_framework.response import Response
-from .serializers import UserSerializer, PostSerializer, ExtendUserSerializer, CommentSerializer, PostImageSerializer
+from .serializers import UserSerializer, PostSerializer, ExtendUserSerializer, CommentSerializer, PostImageSerializer, UsernameSerializer
+
+from rest_framework.response import Response
+
+from rest_framework.permissions import IsAuthenticated
+
+
 from django.contrib.auth.models import User
 from django.contrib.auth.hashers import make_password
 from .models import Post, Comment, Like, ExtendUser, PostImage
@@ -133,3 +139,25 @@ def commentlist(request, pk):
         data.append(comment_data)
 
     return Response(data, status=status.HTTP_200_OK)
+@api_view(['POST'])
+# @permission_classes([IsAuthenticated])
+def getUsername(request):
+    serializer = UsernameSerializer(data=request.data)
+    
+    if serializer.is_valid():
+        # Retrieve the username of the authenticated user
+        username = serializer.validated_data.get('username')
+        
+        try:
+            user = User.objects.get(username=username)
+            # You can set the session of username here
+            request.session['username'] = username
+
+            #access the session
+            username = request.session.get('username')
+            print(f'----------{username}------')
+            return Response({'username': username}, status=status.HTTP_200_OK)
+        except User.DoesNotExist:
+            return Response({'error': 'User does not exist.'}, status=status.HTTP_404_NOT_FOUND)
+    else:
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

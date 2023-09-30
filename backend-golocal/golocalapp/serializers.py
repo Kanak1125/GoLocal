@@ -55,3 +55,6 @@ class PostSerializer(serializers.ModelSerializer):
 
 
 
+    
+class UsernameSerializer(serializers.Serializer):
+    username = serializers.CharField(max_length=1500)

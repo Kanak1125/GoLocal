@@ -22,14 +22,188 @@
     border: 1px solid hsl(188, 62%, 43%);
   }
 
-    .border-secondary {
-        border: 1px solid hsl(160, 44%, 72%);
-    }
-    
-    .secondary-color {
-        background-color: hsl(160, 44%, 72%);
-    }
-    .ternary-color {
-        background-color: hsl(138, 100%, 93%);
-    }
+  .border-accent-2 {
+    border: 2px solid hsl(188, 62%, 43%);
+  }
+
+  .border-secondary {
+    border: 1px solid hsl(160, 44%, 72%);
+  }
+
+  .secondary-color {
+    background-color: hsl(160, 44%, 72%);
+  }
+  .ternary-color {
+    background-color: hsl(138, 100%, 93%);
+  }
+}
+.container {
+  z-index: 10;
+}
+.location-accessbility {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+  width: 100%;
+  max-width: 500px;
+  height: 100%;
+  padding: 10px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;;
+}
+.location-accessbility form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+.location-accessbility form .loaction-name {
+  width: 100%;
+  height: 100%;
+  margin-bottom: 10px;
+}
+.location-accessbility form .loaction-name label {
+  display: block;
+  width: 100%;
+  height: 100%;
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: #333;
+}
+.location-accessbility form .loaction-name label input {
+  display: block;
+  width: 100%;
+  height: 100%;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  outline: none;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #333;
+}
+.location-accessbility form .select-access {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+.location-accessbility form .select-access label {
+  display: block;
+  width: 100%;
+  height: 100%;
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: #333;
+}
+.location-accessbility form .select-access select {
+  display: block;
+  width: 100%;
+  height: 100%;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  outline: none;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #333;
+}
+.location-accessbility form .select-access select option {
+  display: block;
+  width: 100%;
+  height: 100%;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  outline: none;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #333;
+}
+.location-accessbility form .select-access select option:hover {
+  background-color: #ccc;
+}
+.location-accessbility form .select-access select option:active {
+  background-color: #ccc;
+}
+.location-accessbility form .select-access select option:checked {
+  background-color: #ccc;
+}
+.location-accessbility form .select-access select option:focus {
+  background-color: #ccc;
+}
+.location-accessbility form .select-access select option:disabled {
+  background-color: #ccc;
+}
+.location-accessbility form .select-access select option:placeholder {
+  background-color: #ccc;
+}
+.location-accessbility form .select-access select option:checked {
+  background-color: #ccc;
+}
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* The slider (circle) */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  transition: 0.4s;
+  border-radius: 34px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  transition: 0.4s;
+  border-radius: 50%;
+}
+
+.switch input:checked + .slider {
+  background-color: hsl(188, 62%, 40%);
+}
+
+.switch input:focus + .slider {
+  box-shadow: 0 0 1px hsl(160, 44%, 72%);
+}
+
+.switch input:checked + .slider:before {
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
 }

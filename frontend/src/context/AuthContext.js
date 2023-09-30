@@ -14,41 +14,65 @@ export default function AuthProvider({ children }) {
     const [currentUser, setCurrentUser] = useLocalStorage('currentUser', '');
     const [userTokens, setUserTokens] = useState(null);
     const [loading, setLoading] = useState(false);
+    const [error, setError] = useState("");
 
     // useEffect(() => {
     //     async function getApi() {
-    //         const response = await axios({
-    //             method: "get",
-    //             url: "http://127.0.0.1:8000/api/token/",
+    //         await axios({
+    //             method: "post",
+    //             url: "http://127.0.0.1:8000/api/getUsername/",
+    //             data: {
+    //                 username: currentUser,
+    //             }
     //         })
-    
-    //         const data = await response.data;
-    //         // console.log(data);
-    //         setCurrentUser(data);
+    //         .then(() => console.log("Username successfully posted..."))
+    //         .catch((err) => console.error(`ERROR: ${err}`));
     //     }
 
     //     getApi();
+    // }, [currentUser]);
 
-    // }, []);
-
-    let login = async (username, password) => {
-        const response = await axios({
+    function postUserToSession() {
+        axios({
             method: "post",
-            url: "http://127.0.0.1:8000/api/token/",
+            url: "http://127.0.0.1:8000/api/getUsername/",
             data: {
-                username,
-                password,
+                "username": currentUser.username,
             }
         })
+        .then(() => console.log("Username successfully posted..."))
+        .catch((err) => console.error(`ERROR: ${err}`));
+    }
 
-        const data = await response.data;
-        if (response.status === 200) {
-            setCurrentUser(jwtDecode(data.access));
-            setUserTokens(data);
-        } else {
-            console.error("Alert something went wrong");
+    let login = async (username, password) => {
+        setError("");
+        setLoading(true);
+        try {
+            const response = await axios({
+                method: "post",
+                url: "http://127.0.0.1:8000/api/token/",
+                data: {
+                    username,
+                    password,
+                }
+            })
+    
+            const data = await response.data;
+            if (response.status === 200) {
+                setCurrentUser(jwtDecode(data.access));
+                setUserTokens(data);
+            } else {
+                console.error("Alert something went wrong");
+            }
+            console.log(data);
+            postUserToSession();
+            // error while calling this function
+            
+            setLoading(false);
+        } catch (err) {
+            setError("Login failed!");
+            setLoading(false);
         }
-        console.log(data);
     }
 
     let logout = () => {
@@ -59,6 +83,7 @@ export default function AuthProvider({ children }) {
         currentUser,
         login,
         logout,
+        error,
     }
 
   return (
