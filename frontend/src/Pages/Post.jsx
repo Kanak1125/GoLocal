@@ -132,11 +132,6 @@ const Post = () => {
             />
           </form>
         </div>
-        {buttonClicked && (
-          <div>
-            <WebMap />
-          </div>
-        )}
       </div>
     </div>
   );
