@@ -37,7 +37,7 @@ export default function AuthProvider({ children }) {
             method: "post",
             url: "http://127.0.0.1:8000/api/getUsername/",
             data: {
-                "username": currentUser,
+                "username": currentUser.username,
             }
         })
         .then(() => console.log("Username successfully posted..."))
@@ -66,6 +66,8 @@ export default function AuthProvider({ children }) {
             }
             console.log(data);
             postUserToSession();
+            // error while calling this function
+            
             setLoading(false);
         } catch (err) {
             setError("Login failed!");
