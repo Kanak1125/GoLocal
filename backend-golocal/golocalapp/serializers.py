@@ -41,8 +41,9 @@ class PostSerializer(serializers.ModelSerializer):
     images = PostImageSerializer(many=True, read_only=True)
     uploaded_images = serializers.ListField(
         child = serializers.ImageField(max_length=1000000, allow_empty_file=False, use_url=False),
-        write_only=True
+        write_only=True 
     )
+    total_likes = serializers.SerializerMethodField()
     # comments = CommentSerializer(many=True, read_only=True)
     # uploaded_images = serializers.ListField(
     #     child=serializers.ImageField(max_length=1000000, allow_empty_file=False, use_url=False),
@@ -50,7 +51,7 @@ class PostSerializer(serializers.ModelSerializer):
     # )
     class Meta:
         model = Post
-        fields = ['id', 'user', 'name', 'transportation', 'restaurant', 'lodging', 'trek', 'difficulty', 'description', 'location','upload_date','images', 'uploaded_images']
+        fields = ['id', 'user', 'name', 'transportation', 'likes','total_likes', 'restaurant', 'lodging', 'trek', 'difficulty', 'description', 'location','upload_date','images', 'uploaded_images']
 
     def create(self, validated_data):
         uploaded_images = validated_data.pop('uploaded_images')
@@ -59,6 +60,8 @@ class PostSerializer(serializers.ModelSerializer):
             newpost_image = PostImage.objects.create(post=post, image=image)
 
         return post
+    def get_total_likes(self, obj):
+        return obj.total_likes()
     # class Meta:
     #     model = Post
     #     fields = '__all__'
