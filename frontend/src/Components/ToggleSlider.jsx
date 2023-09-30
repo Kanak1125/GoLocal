@@ -1,6 +1,7 @@
 import React from "react";
 
 const ToggleSlider = () => {
+  // const { label } = props;
   const [isChecked, setIsChecked] = React.useState(false);
   const [diffcult, setDiffcult] = React.useState("");
   const handleToggle = () => {
@@ -15,7 +16,7 @@ const ToggleSlider = () => {
     });
   }
   return (
-    <div className="mt-3">
+    <div className="mt-3 w-full flex items-center justify-between">
       <label className='switch'>
         <input type='checkbox' checked={isChecked} onChange={handleToggle} />
         <span className='slider'></span>
