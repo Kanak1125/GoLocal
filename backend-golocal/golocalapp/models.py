@@ -7,11 +7,6 @@ from django.contrib.auth.models import User
 #     user = models.OneToOneField(User, on_delete=models.CASCADE, null=True, blank=True)
 
 
-class Transportation(models.Model):
-    t_name = models.CharField(max_length=500, blank=True, null=True)
-
-    def __str__(self):
-        return self.t_name
 
 class ExtendUser(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
@@ -24,16 +19,13 @@ class Post(models.Model):
     name = models.CharField(max_length=500, blank=True, null=True)
     description = models.TextField(max_length=1000, blank=True)
     transportation = models.CharField(max_length=500, blank=True, null=True)
-    # transportation = models.ManyToManyField(Transportation, blank=True)
+    restaurant = models.CharField(max_length=500, blank=True, null=True)
+    lodging = models.CharField(max_length=500, blank=True, null=True)
+    trek = models.BooleanField(default=False)
     
-    difficulty_choice = [
-        ('Easy', 'Easy'),
-        ('Moderate', 'Moderate'),
-        ('Hard', 'Hard'),  
-    ]
-    difficulty = models.CharField(max_length=10, choices=difficulty_choice, blank=True,null=True)
+    difficulty = models.CharField(max_length=100, blank=True,null=True)
 
-    location = models.CharField(max_length=500, blank=True, null=True)
+    location = models.CharField(max_length=100, blank=True, null=True)
     upload_date = models.DateTimeField(auto_now_add=True, blank=True, null=True)
 
     image = models.ImageField(upload_to='post_images/', blank=True)
@@ -42,7 +34,7 @@ class Post(models.Model):
         return  f'User:{self.user} - {self.description[:10]}'
 
 class PostImage(models.Model):
-    post = models.ForeignKey(Post, on_delete=models.CASCADE, null=True, blank=True)
+    post = models.ForeignKey(Post, on_delete=models.CASCADE, null=True, blank=True, related_name="images")
     image = models.ImageField(upload_to='post_images/', blank=True)
 
     def __str__(self):
