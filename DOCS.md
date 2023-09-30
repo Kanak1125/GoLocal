@@ -32,9 +32,10 @@ npm install
 - pip install djangorestframework-simplejwt
 - pip install argon2-cffi
 - pip install mysqlclient
-- python -m pip install Pillow
+- pip install pillow
 
 ## api urls
 
 - http://127.0.0.1:8000/api/user-create/
 - http://127.0.0.1:8000/api/user-list/
+- http://127.0.0.1:8000/api/post-create-list/

@@ -10,6 +10,9 @@ django-cors-headers = "*"
 djangorestframework-simplejwt = "*"
 mysqlclient = "*"
 argon2-cffi = "*"
+pillow = "*"
+cloudinary = "*"
+load-dotenv = "*"
 
 [dev-packages]
 
