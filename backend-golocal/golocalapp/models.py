@@ -17,7 +17,7 @@ class ExtendUser(models.Model):
 class Post(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
     name = models.CharField(max_length=500, blank=True, null=True)
-    description = models.TextField(max_length=1000, blank=True)
+    description = models.TextField(max_length=1000, blank=True, null=True)
     transportation = models.CharField(max_length=500, blank=True, null=True)
     restaurant = models.CharField(max_length=500, blank=True, null=True)
     lodging = models.CharField(max_length=500, blank=True, null=True)

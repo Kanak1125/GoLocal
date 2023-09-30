@@ -14,18 +14,19 @@ const Post = () => {
     description: "",
   });
   const [isChecked, setIsChecked] = React.useState(false);
-  const [diffcult, setDiffcult] = React.useState("easy");
+  const [diffcult, setDiffcult] = React.useState("");
   const handleToggle = () => {
     setIsChecked(!isChecked);
   };
   const [images, setImages] = useState([]);
 
   function handleChangediff(event) {
-    const { value } = event.target;
-    console.log(value);
-    setDiffcult(value);
+    const { checked } = event.target;
+
+    setDiffcult((level) => {
+      level = checked;
+    });
   }
-  console.log(diffcult);
 
   const [buttonClicked, setButtonClicked] = useState(false);
 
@@ -43,11 +44,17 @@ const Post = () => {
       };
     });
   }
+
+  useEffect(() => {
+    console.log(images);
+  }, [images])
+
   const imageChange = (event) => {
     if (event.target.files && event.target.files) {
       setImages(
         [...event.target.files].map((file) => {
-          return URL.createObjectURL(file);
+          // return URL.createObjectURL(file);
+          return file;
         })
       );
     }
@@ -55,45 +62,26 @@ const Post = () => {
   };
   console.log(images);
 
-  function getApi() {
-    console.log("------Starting uploading----------");
-
+  function submitData(event) {
+    event.preventDefault();
+    const formPayload = new FormData();
+    formPayload.append("location", formData.location);
+    formPayload.append("restaurant", formData.restaurant);
+    formPayload.append("lodging", formData.lodging);
+    formPayload.append("difficuty", diffcult);
+    formPayload.append("description", formData.description);
+    formPayload.append("transport", formData.transport);
+    formPayload.append("image", images);
     axios({
-      method: "post",
-      url: "http://127.0.0.1:8000/api/post-create-list/",
-      data: {
-        user: currentUser.user_id,
-        name: formData.location,
-        description: formData.description,
-        transportation: formData.transport,
-        restaurant: formData.restaurant,
-        lodging: formData.lodging,
-        trek: isChecked,
-        difficulty: null,
-        location: null,
-        images: images,
-
-        // id: 1,
-        // user: 1,
-        // name: null,
-        // transportation: null,
-        // restaurant: null,
-        // lodging: null,
-        // trek: false,
-        // difficulty: null,
-        // description: "High",
-        // location: null,
-        // upload_date: null,
-        // images: ["a", "b"],
+      method: 'post',
+      url: 'http://127.0.0.1:8000/api/post-create-list/',
+      formData,
+      headers :{
+        "Content-Type": "multipart/form-data"
       },
     })
       .then(() => console.log("Post successfully posted..."))
       .catch((err) => console.error(`ERROR: ${err}`));
-  }
-
-  function submitData(event) {
-    event.preventDefault();
-    getApi();
   }
 
   return (
@@ -211,6 +199,11 @@ const Post = () => {
             />
           </form>
         </div>
+        {buttonClicked && (
+          <div>
+            <WebMap />
+          </div>
+        )}
       </div>
     </div>
   );
