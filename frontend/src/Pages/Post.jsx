@@ -75,8 +75,8 @@ const Post = () => {
                 value={formData.restaurant}
                 onChange={handleChange}
               >
-                <option value='available'>Available</option>
-                <option value='not-available'>Not Available</option>
+                <option value='Resturant '>Available</option>
+                <option value=''>Not Available</option>
               </select>
 
               <label htmlFor='lodging'>Lodging Available</label>
@@ -87,9 +87,9 @@ const Post = () => {
                 value={formData.lodging}
                 onChange={handleChange}
               >
-                <option value='available'>Available</option>
+                <option value='Lodging available'>Available</option>
                 <option value='only-few'>Only Few</option>
-                <option value='Not-Available'>Not Available</option>
+                <option value=''>Not Available</option>
               </select>
             </div>
             
