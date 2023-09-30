@@ -16,7 +16,6 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
         return token
 
 class ExtendUserSerializer(serializers.ModelSerializer):
-
     class Meta:
         model = ExtendUser
         fields = ['profile_picture', 'location']
