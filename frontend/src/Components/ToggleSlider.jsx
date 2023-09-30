@@ -15,7 +15,7 @@ const ToggleSlider = () => {
     });
   }
   return (
-    <div>
+    <div className="mt-3">
       <label className='switch'>
         <input type='checkbox' checked={isChecked} onChange={handleToggle} />
         <span className='slider'></span>
@@ -27,6 +27,7 @@ const ToggleSlider = () => {
           <select
             name='difficulty'
             id='difficulty'
+            className="my-3 border-accent-2 rounded-md border-2 ml-2"
             value={diffcult}
             onChange={handleChange}
           >
