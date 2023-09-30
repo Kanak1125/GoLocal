@@ -52,6 +52,11 @@ const Post = () => {
                 >
                   Add location From Map
                 </button>
+                {buttonClicked && (
+                <div className="my-4 rounded-md w-full">
+                  <WebMap />
+                </div>
+              )}
               </div>
             </div>
             <div className='select-access'>
