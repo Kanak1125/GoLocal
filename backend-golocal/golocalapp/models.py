@@ -21,7 +21,6 @@ class Post(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
     name = models.CharField(max_length=500, blank=True, null=True)
     description = models.TextField(max_length=1000, blank=True)
-    image = models.ImageField(upload_to='post_pictures', blank=True, null=True)
     # transportation = models.CharField(max_length=500, blank=True, null=True)
     transportation = models.ManyToManyField(Transportation, blank=True)
     

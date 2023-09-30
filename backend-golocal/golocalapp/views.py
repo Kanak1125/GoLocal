@@ -6,7 +6,7 @@ from rest_framework.response import Response
 
 from rest_framework.permissions import IsAuthenticated
 
-from .serializers import UserSerializer
+from .serializers import UserSerializer,UsernameSerializer
 from django.contrib.auth.models import User
 from django.contrib.auth.hashers import make_password
 
@@ -53,14 +53,22 @@ def usercreate(request):
 @api_view(['POST'])
 # @permission_classes([IsAuthenticated])
 def getUsername(request):
-    try:
+    serializer = UsernameSerializer(data=request.data)
+    
+    if serializer.is_valid():
         # Retrieve the username of the authenticated user
-        username = request.user.username
-        user_id = request.user.id
+        username = serializer.validated_data.get('username')
+        
+        try:
+            user = User.objects.get(username=username)
+            # You can set the session of username here
+            request.session['username'] = username
 
-        # You can return both the username and user_id if needed
-        return Response({'username': username, 'user_id': user_id}, status=status.HTTP_200_OK)
-    except User.DoesNotExist:
-        return Response({'error': 'User not found.'}, status=status.HTTP_404_NOT_FOUND)
-    except Exception as e:
-        return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+            #access the session
+            username = request.session.get('username')
+            print(f'----------{username}------')
+            return Response({'username': username}, status=status.HTTP_200_OK)
+        except User.DoesNotExist:
+            return Response({'error': 'User does not exist.'}, status=status.HTTP_404_NOT_FOUND)
+    else:
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
