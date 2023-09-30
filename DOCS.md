@@ -30,3 +30,4 @@ npm install
 ## api urls
 - http://127.0.0.1:8000/api/user-create/
 - http://127.0.0.1:8000/api/user-list/
+- http://127.0.0.1:8000/api/post-create-list/
