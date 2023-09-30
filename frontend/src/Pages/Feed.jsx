@@ -1,13 +1,27 @@
-import React, { useContext } from "react";
+import React, { useState, useContext } from "react";
 import Navbar from "../Components/Navbar";
 import Posts from "../Components/Posts";
 import Post from "./Post";
 import { useNavigate } from "react-router-dom";
 
 const Feed = () => {
+  const [open, setOpen] = useState(false);
+
+  function openModal() {
+    setOpen(true);
+  }
+
+  function closeModal() {
+    setOpen(false);
+  }
+
   const navigate = useNavigate();
   return (
-    <div>
+    <div className="overflow-y-hidden">
+      {open && <div className="w-full min-h-screen absolute bg-black/40 z-40">
+
+        </div>  
+      }
       <Navbar />
       {/* <Post /> */}
 
@@ -19,7 +33,11 @@ const Feed = () => {
           Post
         </button>
       </div>
-      <Posts />
+      <Posts 
+        open={open}
+        openModal={openModal}
+        closeModal={closeModal}
+      />
     </div>
   );
 };
