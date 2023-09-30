@@ -14,19 +14,18 @@ const Post = () => {
     description: "",
   });
   const [isChecked, setIsChecked] = React.useState(false);
-  const [diffcult, setDiffcult] = React.useState("");
+  const [diffcult, setDiffcult] = React.useState("easy");
   const handleToggle = () => {
     setIsChecked(!isChecked);
   };
   const [images, setImages] = useState([]);
 
   function handleChangediff(event) {
-    const { checked } = event.target;
-
-    setDiffcult((level) => {
-      level = checked;
-    });
+    const { value } = event.target;
+    console.log(value);
+    setDiffcult(value);
   }
+  console.log(diffcult);
 
   const [buttonClicked, setButtonClicked] = useState(false);
 
@@ -57,18 +56,20 @@ const Post = () => {
   console.log(images);
 
   function getApi() {
+    console.log("------Starting uploading----------");
+
     axios({
       method: "post",
       url: "http://127.0.0.1:8000/api/post-create-list/",
       data: {
         user: currentUser.user_id,
         name: formData.location,
+        description: formData.description,
         transportation: formData.transport,
         restaurant: formData.restaurant,
         lodging: formData.lodging,
         trek: isChecked,
-        difficulty: diffcult,
-        description: formData.description,
+        difficulty: null,
         location: null,
         images: images,
 
@@ -210,11 +211,6 @@ const Post = () => {
             />
           </form>
         </div>
-        {buttonClicked && (
-          <div>
-            <WebMap />
-          </div>
-        )}
       </div>
     </div>
   );
