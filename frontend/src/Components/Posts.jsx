@@ -2,9 +2,10 @@ import React from "react";
 import MySwiper from "./MySwiper";
 import { FaRegHeart, FaRegComment } from "react-icons/fa";
 
-const Post = () => {
+const Post = (props) => {
+  const {open, openModal, closeModal} = props;
   return (
-    <div className='posts container bg-white max-w-[576px] ternary-color rounded-lg py-3 px-5 mx-auto'>
+    <div className='posts container bg-white max-w-[576px] ternary-color rounded-lg py-3 px-5 mx-auto cursor-pointer' onClick={openModal}>
       <div className='post-detail flex justify-between '>
         <div className="flex gap-4">
           <div className="w-[32px] h-[32px] rounded-full accent-color"></div>
