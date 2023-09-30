@@ -37,6 +37,9 @@ class CommentSerializer(serializers.ModelSerializer):
         model = Comment
         fields = ['id', 'user', 'post', 'comment']
 
+
+
+
 class PostSerializer(serializers.ModelSerializer):
     images = PostImageSerializer(many=True, read_only=True)
     uploaded_images = serializers.ListField(
@@ -68,3 +71,8 @@ class PostSerializer(serializers.ModelSerializer):
     
 class UsernameSerializer(serializers.Serializer):
     username = serializers.CharField(max_length=1500)
+
+class searchSeralizer(serializers.ModelSerializer):
+    class Meta:
+        model = Post
+        fields = ('id','name','location')

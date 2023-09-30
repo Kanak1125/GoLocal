@@ -1,12 +1,12 @@
+from django.http import HttpResponse
 from django.shortcuts import render
-from rest_framework import status
+from rest_framework import status,viewsets
 
 from rest_framework.decorators import api_view, parser_classes, permission_classes
 from rest_framework.parsers import MultiPartParser, FormParser
-from rest_framework.response import Response
-from .serializers import UserSerializer, PostSerializer, ExtendUserSerializer, CommentSerializer, PostImageSerializer, UsernameSerializer
+from rest_framework.response import Response  
+from .serializers import UserSerializer, ExtendUserSerializer, CommentSerializer, PostImageSerializer, UsernameSerializer,searchSeralizer,PostSerializer
 
-from rest_framework.response import Response
 
 from rest_framework.permissions import IsAuthenticated
 
@@ -140,26 +140,37 @@ def commentlist(request, pk):
         data.append(comment_data)
 
     return Response(data, status=status.HTTP_200_OK)
+
 @api_view(['POST'])
 def getUsername(request):
     serializer = UsernameSerializer(data=request.data)
-    
+    print("Serializer Data: ", serializer)
+ 
     if serializer.is_valid():
-        # Retrieve the username of the authenticated user
-        username = serializer.validated_data.get('username')
+        # Retrieve the username from the serializer
+        uname = serializer.validated_data.get('username')
+        print(uname)
         
         try:
-            if username is None:
-                 logout(username)
-            else:
             # You can set the session of username here
-                request.session['username'] = username
+            request.session['username'] = uname #set the session of their username after loggin in
+            # request.session.save()
 
-                #access the session
-                username = request.session.get('username')
-                print(f'API::----+++---{username}------')
-                return Response({'username': username}, status=status.HTTP_200_OK)
+            username = request.session.get('username')
+            return Response({'username': username}, status=status.HTTP_200_OK)
         except User.DoesNotExist:
             return Response({'error': 'User does not exist.'}, status=status.HTTP_404_NOT_FOUND)
     else:
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+   
+
+class searchViewSet(viewsets.ModelViewSet):
+    queryset = Post.objects.all()
+    serializer_class = searchSeralizer
+
+# Define the allowed actions for the viewset
+search_viewset = searchViewSet.as_view({
+    'get': 'list',       # Allow GET requests for listing
+    'post': 'create',    # Allow POST requests for creating
+})

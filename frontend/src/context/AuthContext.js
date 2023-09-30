@@ -66,6 +66,7 @@ export default function AuthProvider({ children }) {
                 setCurrentUser(jwtDecode(data.access));
                 var username = jwtDecode(data.access).username
                 setUserTokens(data);
+                console.log(username)
             } else {
                 console.error("Alert something went wrong");
             }
@@ -83,7 +84,7 @@ export default function AuthProvider({ children }) {
     let logout = () => {
         setError("");
         setCurrentUser(null);
-        postUserToSession(null);
+        // postUserToSession(null);
     }
 
     const value = {

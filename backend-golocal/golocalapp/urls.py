@@ -4,6 +4,8 @@ from rest_framework_simplejwt.views import (
     TokenRefreshView,
 )
 from . import views
+from .views import search_viewset
+
 urlpatterns = [
     path('user-create/', views.usercreate, name="user-create" ),
     path('user-list/', views.userlist, name="user-list"),
@@ -18,4 +20,5 @@ urlpatterns = [
     path('post/<str:pk>/comment-create/', views.commentcreate, name="comment-create"),
     path('post/<str:pk>/comment-list/', views.commentlist, name="comment-list"),
     path('getUsername/', views.getUsername, name="getUsername"),
+    path('searchcreate/', search_viewset, name="searchcreate"),
 ]

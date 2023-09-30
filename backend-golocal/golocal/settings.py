@@ -35,6 +35,10 @@ ALLOWED_HOSTS = []
 
 
 
+# SESSION_ENGINE = 'django.contrib.sessions.backends.db'  # Use the database-backed session engine.
+# SESSION_COOKIE_SECURE = False  # Set this to True if you want to use secure (HTTPS) sessions.
+
+
 
 # Application definition
 
@@ -54,14 +58,16 @@ INSTALLED_APPS = [
     
 ]
 
+CORS_ALLOW_ALL_ORIGINS = True
+
 MIDDLEWARE = [
     "corsheaders.middleware.CorsMiddleware",
     "django.middleware.common.CommonMiddleware",
 
     'django.middleware.security.SecurityMiddleware',
-    'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
+    'django.contrib.sessions.middleware.SessionMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
@@ -218,7 +224,9 @@ SIMPLE_JWT = {
     "SLIDING_TOKEN_REFRESH_SERIALIZER": "rest_framework_simplejwt.serializers.TokenRefreshSlidingSerializer",
 }
 
-# DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
 # from dotenv import load_dotenv
 # load_dotenv()
+
+SESSION_SAVE_EVERY_REQUEST = True
