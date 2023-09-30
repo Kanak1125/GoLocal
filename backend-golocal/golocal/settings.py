@@ -35,6 +35,10 @@ ALLOWED_HOSTS = []
 
 
 
+# SESSION_ENGINE = 'django.contrib.sessions.backends.db'  # Use the database-backed session engine.
+# SESSION_COOKIE_SECURE = False  # Set this to True if you want to use secure (HTTPS) sessions.
+
+
 
 # Application definition
 
@@ -50,18 +54,22 @@ INSTALLED_APPS = [
     # 'cloudinary',    
     'golocalapp',
     'rest_framework',
-    'corsheaders'
+    'corsheaders',
+        'django_filters',
+
     
 ]
+
+CORS_ALLOW_ALL_ORIGINS = True
 
 MIDDLEWARE = [
     "corsheaders.middleware.CorsMiddleware",
     "django.middleware.common.CommonMiddleware",
 
     'django.middleware.security.SecurityMiddleware',
-    'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
+    'django.contrib.sessions.middleware.SessionMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
@@ -171,6 +179,7 @@ CORS_ALLOWED_ORIGINS = [
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
+        'django_filters.rest_framework.DjangoFilterBackend',
     )
 }
 
@@ -222,3 +231,5 @@ SIMPLE_JWT = {
 
 # from dotenv import load_dotenv
 # load_dotenv()
+
+SESSION_SAVE_EVERY_REQUEST = True

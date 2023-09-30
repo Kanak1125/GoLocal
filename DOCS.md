@@ -42,3 +42,4 @@ npm install
 - http://127.0.0.1:8000/api/post-create-list/
 - http://127.0.0.1:8000/api/post/post_id/comment-create-list/
 - http://127.0.0.1:8000/api/post/getUsername
+- http://127.0.0.1:8000/api/searchcreate/?search=

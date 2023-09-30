@@ -3,6 +3,7 @@ import Navbar from "../Components/Navbar";
 import Posts from "../Components/Posts";
 import Post from "./Post";
 import { useNavigate } from "react-router-dom";
+import Sidebar from "../Components/Sidebar";
 
 const Feed = () => {
   const [open, setOpen] = useState(false);
@@ -17,11 +18,10 @@ const Feed = () => {
 
   const navigate = useNavigate();
   return (
-    <div className="overflow-y-hidden">
-      {open && <div className="w-full min-h-screen absolute bg-black/40 z-40">
-
-        </div>  
-      }
+    <div className='overflow-y-hidden'>
+      {open && (
+        <div className='w-full min-h-screen absolute bg-black/40 z-40'></div>
+      )}
       <Navbar />
       {/* <Post /> */}
 
@@ -33,11 +33,10 @@ const Feed = () => {
           Post
         </button>
       </div>
-      <Posts 
-        open={open}
-        openModal={openModal}
-        closeModal={closeModal}
-      />
+      <main className='flex'>
+        <Posts open={open} openModal={openModal} closeModal={closeModal} />
+        <Sidebar />
+      </main>
     </div>
   );
 };
