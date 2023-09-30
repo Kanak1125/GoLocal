@@ -51,7 +51,6 @@ def usercreate(request):
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 @api_view(['POST'])
-# @permission_classes([IsAuthenticated])
 def getUsername(request):
     serializer = UsernameSerializer(data=request.data)
     
@@ -72,3 +71,11 @@ def getUsername(request):
             return Response({'error': 'User does not exist.'}, status=status.HTTP_404_NOT_FOUND)
     else:
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+
+from django.http import HttpResponse
+
+def checkSession(request):
+    username = request.session.get('username')
+    print(f'----------{username}--**--')
+    return HttpResponse(username)
