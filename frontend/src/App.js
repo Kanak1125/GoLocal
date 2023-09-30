@@ -7,6 +7,7 @@ import Login from "./authentication/Login";
 import Feed from "./Pages/Feed";
 import ForgotPassword from "./authentication/ForgotPassword";
 import Post from "./Pages/Post";
+import AuthProvider from "./context/AuthContext";
 
 function App() {
   return (
@@ -31,11 +32,8 @@ function App() {
         {/* <Route element={<PrivateRoute componentToRender={<UpdateProfile />}/>}>
           <Route path='/update-profile' element={<UpdateProfile />} />
         </Route> */}
-        {/* <Route element={<PrivateRoute componentToRender={<Feed />}/>}> */}
-        <Route path='/' element={<Feed />} />
-        {/* </Route> */}
-        <Route element={<PrivateRoute componentToRender={<Post />} />}>
-          <Route path='/post' element={<Post />} />
+        <Route element={<PrivateRoute componentToRender={<Feed />} />}>
+          <Route path='/' element={<Feed />} />
         </Route>
       </Routes>
     </BrowserRouter>

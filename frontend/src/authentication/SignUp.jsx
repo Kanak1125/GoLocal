@@ -35,7 +35,7 @@ const Signup = () => {
        })
        .then(() => {
         console.log("Signup successful");
-        navigate("/");
+        navigate("/login");
        })
        .catch((err) => console.log(`Error: ${err}`));
     }
