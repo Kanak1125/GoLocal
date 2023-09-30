@@ -39,6 +39,9 @@ const WebMap = () => {
       center={initPosition} 
       zoom={13} 
       scrollWheelZoom={true} 
+      whenReady={() => {
+        
+      }}
       style={{'height': '300px', 'width': '100%'}}
     >
       <TileLayer
