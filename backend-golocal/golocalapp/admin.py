@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import User, Post, Comment, Like, InteractionCount, Transportation
+from .models import User, Post, Comment, Like, InteractionCount
 
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.contrib.auth.models import User
@@ -31,4 +31,3 @@ admin.site.register(Post)
 admin.site.register(Like)
 admin.site.register(Comment)
 admin.site.register(InteractionCount)
-admin.site.register(Transportation)

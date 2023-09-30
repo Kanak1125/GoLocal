@@ -23,7 +23,7 @@ const initPosition = [51.505, -0.15];
 function LocationMarker() {
   const [position, setPosition] = useState(null);
   const map = useMapEvents({
-    click() {
+    mouseover() {
       map.locate();
     },
     locationfound(e) {
@@ -41,18 +41,18 @@ function LocationMarker() {
   );
 }
 
-// return marker location cordinates
-const Markers = () => {
-  const marker = "";
-  const map = useMapEvents({
-    click(e) {
-      const newMarker = e.latlng;
-      marker = newMarker;
-    },
-  });
+// // return marker location cordinates
+// const Markers = () => {
+//   const marker = "";
+//   const map = useMapEvents({
+//     click(e) {
+//       const newMarker = e.latlng;
+//       marker = newMarker;
+//     },
+//   });
 
-  return <Marker position={marker}></Marker>;
-};
+//   return <Marker position={marker}></Marker>;
+// };
 
 const WebMap = () => {
   return (
