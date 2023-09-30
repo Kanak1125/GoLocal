@@ -15,14 +15,16 @@ class Transportation(models.Model):
 
 class ExtendUser(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    profile_picture = models.ImageField(upload_to='profile_pictures', blank=True, null=True)
-    loaction = models.CharField(max_length=500, blank=True, null=True)
+    profile_picture = models.ImageField(upload_to='profile_pictures/', blank=True, null=True)
+    location = models.CharField(max_length=500, blank=True, null=True)
+
+
 class Post(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
     name = models.CharField(max_length=500, blank=True, null=True)
     description = models.TextField(max_length=1000, blank=True)
-    # transportation = models.CharField(max_length=500, blank=True, null=True)
-    transportation = models.ManyToManyField(Transportation, blank=True)
+    transportation = models.CharField(max_length=500, blank=True, null=True)
+    # transportation = models.ManyToManyField(Transportation, blank=True)
     
     difficulty_choice = [
         ('Easy', 'Easy'),
@@ -33,9 +35,18 @@ class Post(models.Model):
 
     location = models.CharField(max_length=500, blank=True, null=True)
     upload_date = models.DateTimeField(auto_now_add=True, blank=True, null=True)
+
+    # image = models.ImageField(upload_to='post_images/', blank=True)
     
     def __str__(self):
-        return  f'User:{self.user.username} - {self.description[:10]}'
+        return  f'User:{self.user} - {self.description[:10]}'
+
+class PostImage(models.Model):
+    post = models.ForeignKey(Post, on_delete=models.CASCADE, null=True, blank=True)
+    image = models.ImageField(upload_to='post_images/', blank=True)
+
+    def __str__(self):
+        return self.image.name
 
 class Comment(models.Model):
     post = models.ForeignKey(Post, on_delete=models.CASCADE, null=True, blank=True)
@@ -43,7 +54,7 @@ class Comment(models.Model):
     comment = models.TextField(max_length=1000, blank=True)
 
     def __str__(self):
-        return f'User:{self.user.username} - {self.comment[:20]}'
+        return f'User:{self.user} - {self.comment[:20]}'
 
 class Like(models.Model):
     post = models.ForeignKey(Post, on_delete=models.CASCADE, null=True, blank=True)

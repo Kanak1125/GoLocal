@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import ToggleSlider from "../Components/ToggleSlider";
+import WebMap from "../Components/WebMap";
 
 const Post = () => {
   const [formData, setFormData] = useState({
@@ -10,6 +11,13 @@ const Post = () => {
     description: "",
   });
 
+  const [buttonClicked, setButtonClicked] = useState(false);
+
+  function handleClick(e) {
+    e.preventDefault();
+    setButtonClicked((prevState) => !prevState);
+  }
+
   function handleChange(event) {
     const { name, type, checked, value } = event.target;
     setFormData((prevFormData) => {
@@ -19,18 +27,12 @@ const Post = () => {
       };
     });
   }
-  console.log(
-    formData.location,
-    formData.transport,
-    formData.restaurant,
-    formData.lodging,
-    formData.description
-  );
+
   return (
     <div className='min-w-[280px] max-w-[444px] min-h-screen flex items-center justify-center w-full my-4 mx-auto'>
       <div className='container'>
         <div className='location-accessbility'>
-          <form className="py-4 px-2">
+          <form className='py-4 px-2'>
             <div className='loaction-name'>
               <label htmlFor='location'>
                 Location
@@ -43,7 +45,10 @@ const Post = () => {
                 />
               </label>
               <div className='map'>
-                <button className='accent-color text-white font-bold py-2 px-4 rounded-full transition-all duration-300 my-3'>
+                <button
+                  onClick={(e) => handleClick(e)}
+                  className='accent-color text-white font-bold py-2 px-4 rounded-full transition-all duration-300'
+                >
                   Add location From Map
                 </button>
               </div>
@@ -53,7 +58,7 @@ const Post = () => {
               <select
                 name='transport'
                 id='transport'
-                className="mb-4"
+                className='mb-4'
                 value={formData.transport}
                 onChange={handleChange}
               >
@@ -66,7 +71,7 @@ const Post = () => {
               <select
                 name='restaurant'
                 id='restaurant'
-                className="mb-4"
+                className='mb-4'
                 value={formData.restaurant}
                 onChange={handleChange}
               >
@@ -78,7 +83,7 @@ const Post = () => {
               <select
                 name='lodging'
                 id='lodging'
-                className="mb-4"
+                className='mb-4'
                 value={formData.lodging}
                 onChange={handleChange}
               >
@@ -108,6 +113,11 @@ const Post = () => {
           </form>
         </div>
       </div>
+      {buttonClicked && (
+        <div>
+          <WebMap />
+        </div>
+      )}
     </div>
   );
 };
