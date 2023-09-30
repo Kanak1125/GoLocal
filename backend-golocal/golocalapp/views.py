@@ -14,7 +14,7 @@ from rest_framework.permissions import IsAuthenticated
 from django.contrib.auth.models import User
 from django.contrib.auth.hashers import make_password
 from .models import Post, Comment, Like, ExtendUser, PostImage
-
+from django.shortcuts import get_object_or_404
 
 
 # Create your views here.
@@ -66,6 +66,16 @@ def usercreate(request):
 
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+
+
+# from rest_framework import permissions
+# from rest_framework.authentication import TokenAuthentication
+
+# class UserLogin(APIView):
+#     permission_classes = (permissions.AllowAny,)
+#     authentication_classes = (TokenAuthentication,)
+#     def post(self, request):
+#         data = request.data
 # @api_view(['POST'])
 # @parser_classes([MultiPartParser, FormParser])
 # def postcreate(request):
@@ -106,7 +116,6 @@ class postcreate(generics.ListCreateAPIView):
 #     queryset = PostImage.objects.get(id=id)
 #     serializer_class = Post
 
-
 # @api_view(['GET'])
 # def postlist(request):
 #     posts = Post.objects.all()
@@ -122,23 +131,37 @@ class postcreate(generics.ListCreateAPIView):
 
 #     return Response(data, status=status.HTTP_200_OK)
 
-@api_view(['POST'])
-def commentcreate(request, pk):
-    serializer = CommentSerializer(data=request.data)
-    if serializer.is_valid():
-        serializer.save()
-        return Response(serializer.data, status=status.HTTP_201_CREATED)
+# @api_view(['POST'])
+# def commentcreate(request, pk):
+#     serializer = CommentSerializer(data=request.data)
+#     if serializer.is_valid():
+#         serializer.save()
+#         return Response(serializer.data, status=status.HTTP_201_CREATED)
 
-@api_view(['GET'])  
-def commentlist(request, pk):
-    comments = Comment.objects.filter(post=pk)
-    data = []
+# class commentcreate(generics.ListCreateAPIView):
+#     queryset = Comment.objects.all()
+#     serializer_class = CommentSerializer
 
-    for comment in comments:
-        comment_data = CommentSerializer(comment).data
-        data.append(comment_data)
+# @api_view(['GET'])  
+# def commentlist(request, pk):
+#     comments = Comment.objects.filter(post=pk)
+#     data = []
 
-    return Response(data, status=status.HTTP_200_OK)
+#     for comment in comments:
+#         comment_data = CommentSerializer(comment).data
+#         data.append(comment_data)
+
+#     return Response(data, status=status.HTTP_200_OK)
+
+class CommentListCreateView(generics.ListCreateAPIView):
+    serializer_class = CommentSerializer
+
+    def get_queryset(self):
+        post_id = self.kwargs['post_id']
+        return Comment.objects.filter(post_id=post_id)
+    
+    from django.shortcuts import get_object_or_404
+
 @api_view(['POST'])
 # @permission_classes([IsAuthenticated])
 def getUsername(request):
