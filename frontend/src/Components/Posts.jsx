@@ -1,11 +1,16 @@
 import React from "react";
+<<<<<<< HEAD
 import MySwiper from "./MySwiper";
 import { FaRegHeart, FaRegComment } from "react-icons/fa";
 import { BsArrowsAngleExpand } from "react-icons/bs";
+=======
+import PostItem from "./PostItem";
+>>>>>>> f81704d9362fde650f7dcc4a9288d18d4cb128a3
 
 const Post = (props) => {
   const { open, openModal, closeModal } = props;
   return (
+<<<<<<< HEAD
     <div
       className='posts container bg-white max-w-[576px] ternary-color rounded-lg py-3 px-5 mx-auto cursor-pointer'
       onClick={openModal}
@@ -59,6 +64,13 @@ const Post = (props) => {
         </div>
       </div>
     </div>
+=======
+    <PostItem 
+      open={open}
+      openModal={openModal}
+      closeModal={closeModal}
+    />
+>>>>>>> f81704d9362fde650f7dcc4a9288d18d4cb128a3
   );
 };
 
