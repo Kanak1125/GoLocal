@@ -31,6 +31,7 @@ npm install
 - python -m pip install django-cors-headers
 - pip install djangorestframework-simplejwt
 - pip install argon2-cffi
+- pip install mysqlclient
 - pip install pillow
 
 ## api urls
