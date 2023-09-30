@@ -28,11 +28,7 @@ class Post(models.Model):
     location = models.CharField(max_length=100, blank=True, null=True)
     upload_date = models.DateTimeField(auto_now_add=True, blank=True, null=True)
 
-<<<<<<< HEAD
-    image = models.ImageField(upload_to='post_images/', blank=True, null=True)
-=======
     image = models.ImageField(upload_to='post_images/', blank=True)
->>>>>>> 2458d0a95ccb7f6713d4751f6f1a40100af73db6
     # likes = models.ManyToManyField(User, related_name='likes', blank=True)
 
     # def total_likes(self):
