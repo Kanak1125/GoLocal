@@ -44,62 +44,56 @@ const Post = () => {
       };
     });
   }
+
+  useEffect(() => {
+    console.log(images);
+  }, [images])
+
   const imageChange = (event) => {
-    if (event.target.files && event.target.files) {
-      setImages(
-        [...event.target.files].map((file) => {
-          return URL.createObjectURL(file);
-        })
-      );
-    }
+    event.preventDefault()
     console.log(event.target.files);
-  };
-  console.log(images);
+    // if (event.target.files && event.target.files) {
+    //   setImages(
+    //     [...event.target.files].map((file) => {
+    //       // return URL.createObjectURL(file);
+    //       return file;
+    //     })
+    //   );
+    // }
+    if (event.target.files && event.target.files[0]) {
+      setImages(event.target.files[0]);
 
-  function getApi() {
+    };
+  }
+  const formPayload = new FormData();
+  function submitData() {
+    // event.preventDefault();
+    formPayload.append("location", 'nirjal');
+    // formPayload.append("restaurant", formData.restaurant);
+    // formPayload.append("lodging", formData.lodging);
+    // formPayload.append("difficulty", diffcult);
+    // formPayload.append("description", formData.description);
+    // formPayload.append("transport", formData.transport);
+    // formPayload.append("uploaded_images", images);
+
+    console.log(formPayload.entries()[0]);
     axios({
-      method: "post",
-      url: "http://127.0.0.1:8000/api/post-create-list/",
-      data: {
-        user: currentUser.user_id,
-        name: formData.location,
-        transportation: formData.transport,
-        restaurant: formData.restaurant,
-        lodging: formData.lodging,
-        trek: isChecked,
-        difficulty: diffcult,
-        description: formData.description,
-        location: null,
-        images: images,
-
-        // id: 1,
-        // user: 1,
-        // name: null,
-        // transportation: null,
-        // restaurant: null,
-        // lodging: null,
-        // trek: false,
-        // difficulty: null,
-        // description: "High",
-        // location: null,
-        // upload_date: null,
-        // images: ["a", "b"],
+      method: 'post',
+      url: 'http://127.0.0.1:8000/api/post-create-list/',
+      formPayload,
+      headers: {
+        "Content-Type": "multipart/form-data"
       },
     })
       .then(() => console.log("Post successfully posted..."))
       .catch((err) => console.error(`ERROR: ${err}`));
   }
 
-  function submitData(event) {
-    event.preventDefault();
-    getApi();
-  }
-
   return (
     <div className='min-w-[280px] max-w-[444px] min-h-screen flex items-center justify-center w-full my-4 mx-auto'>
       <div className='container'>
         <div className='location-accessbility'>
-          <form className='py-4 px-2' onSubmit={submitData}>
+          <form className='py-4 px-2' >
             <div className='loaction-name'>
               <label htmlFor='location'>
                 Location
@@ -203,10 +197,11 @@ const Post = () => {
                 changeDiff={handleChangediff}
               />
             </div>
-            <input
+            <input onClick={submitData}
               type='submit'
               value='Upload'
               className='accent-color text-white font-bold py-2 px-4 rounded-full transition-all duration-300 mt-5 cursor-pointer'
+
             />
           </form>
         </div>
@@ -218,6 +213,6 @@ const Post = () => {
       </div>
     </div>
   );
-};
 
+}
 export default Post;

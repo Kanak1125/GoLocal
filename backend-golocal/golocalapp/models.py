@@ -17,7 +17,7 @@ class ExtendUser(models.Model):
 class Post(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
     name = models.CharField(max_length=500, blank=True, null=True)
-    description = models.TextField(max_length=1000, blank=True)
+    description = models.TextField(max_length=1000, blank=True, null=True)
     transportation = models.CharField(max_length=500, blank=True, null=True)
     restaurant = models.CharField(max_length=500, blank=True, null=True)
     lodging = models.CharField(max_length=500, blank=True, null=True)
@@ -28,11 +28,11 @@ class Post(models.Model):
     location = models.CharField(max_length=100, blank=True, null=True)
     upload_date = models.DateTimeField(auto_now_add=True, blank=True, null=True)
 
-    image = models.ImageField(upload_to='post_images/', blank=True)
-    likes = models.ManyToManyField(User, related_name='likes', blank=True)
+    image = models.ImageField(upload_to='post_images/', blank=True, null=True)
+    # likes = models.ManyToManyField(User, related_name='likes', blank=True)
 
-    def total_likes(self):
-        return self.likes.count()
+    # def total_likes(self):
+    #     return self.likes.count()
     
     def __str__(self):
         return  f'User:{self.user} - {self.description[:10]}'
