@@ -9,16 +9,15 @@ const Login = () => {
   const { login, error } = useAuthContext();
   const navigate = useNavigate();
 
-  function handleForm(e) {
+  async function handleForm(e) {
     e.preventDefault();
     
     login(usernameRef.current.value, passwordRef.current.value);
 
     if (error === "") {
-      navigate('/login');
-      // return;
+      return navigate('/login');
     } else {
-      navigate('/');
+      return navigate('/');
     }
   }
 

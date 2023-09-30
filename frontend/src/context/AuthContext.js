@@ -76,6 +76,7 @@ export default function AuthProvider({ children }) {
     }
 
     let logout = () => {
+        setError("");
         setCurrentUser(null);
     }
 

@@ -92,6 +92,10 @@ const Post = () => {
                 <option value='Not-Available'>Not Available</option>
               </select>
             </div>
+            
+            <label htmlFor="upload-img" className="accent-color text-white font-bold py-2 px-4 rounded-full transition-all duration-300 mb-4 cursor-pointer align-start">Upload image</label>
+            <input type="file" name="image" id="upload-img" className="hidden"/>
+
             <div className='discription-field w-full'>
               <textarea
                 className='w-full px-3 py-2 border rounded-lg focus:ring focus:ring-blue-300 focus:border-blue-500'
@@ -101,14 +105,11 @@ const Post = () => {
                 name='description'
               />
             </div>
-            <div className='trek-toggle flex items-center w-full'>
+            <div className='trek-toggle flex flex-col w-full font-bold mt-2'>
+              <label>Trek / Hike?</label>
               <ToggleSlider />
             </div>
-            <input
-              type='submit'
-              value='Upload'
-              className='accent-color text-white font-bold py-2 px-4 rounded-full transition-all duration-300 my-3 cursor-pointer'
-            />
+            <input type='submit' value='Upload' className="accent-color text-white font-bold py-2 px-4 rounded-full transition-all duration-300 mt-5 cursor-pointer"/>
           </form>
         </div>
         {buttonClicked && (

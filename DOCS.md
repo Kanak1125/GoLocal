@@ -22,6 +22,7 @@ npm install
 - npm i bootstrap react-bootstrap
 - npm i swiper
 - npm i jwt-decode
+- npm i react-leaflet
 
 ### python commands
 
@@ -30,9 +31,10 @@ npm install
 - python -m pip install django-cors-headers
 - pip install djangorestframework-simplejwt
 - pip install argon2-cffi
-- npm i react-leaflet
+- pip install pillow
 
 ## api urls
 
 - http://127.0.0.1:8000/api/user-create/
 - http://127.0.0.1:8000/api/user-list/
+- http://127.0.0.1:8000/api/post-create-list/

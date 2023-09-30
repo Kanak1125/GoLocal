@@ -1,14 +1,19 @@
 from django.shortcuts import render
 from rest_framework import status
 
-from rest_framework.decorators import api_view, permission_classes
+from rest_framework.decorators import api_view, parser_classes, permission_classes
+from rest_framework.parsers import MultiPartParser, FormParser
+from rest_framework.response import Response
+from .serializers import UserSerializer, PostSerializer, ExtendUserSerializer, CommentSerializer, PostImageSerializer, UsernameSerializer
+
 from rest_framework.response import Response
 
 from rest_framework.permissions import IsAuthenticated
 
-from .serializers import UserSerializer,UsernameSerializer
+
 from django.contrib.auth.models import User
 from django.contrib.auth.hashers import make_password
+from .models import Post, Comment, Like, ExtendUser, PostImage
 
 
 
@@ -18,8 +23,19 @@ from django.contrib.auth.hashers import make_password
 @api_view(['GET'])
 def userlist(request):
     users = User.objects.all()
-    serializer = UserSerializer(users, many=True)
-    return Response(serializer.data)
+    data = []
+
+    for user in users:
+        user_data = UserSerializer(user).data
+        extend_user = ExtendUser.objects.filter(user=user).first()  # Retrieve the extended user data for this user
+
+        if extend_user:
+            extend_data = ExtendUserSerializer(extend_user).data
+            user_data['extend_info'] = extend_data  # Include the extended user information in the user's data
+
+        data.append(user_data)
+
+    return Response(data, status=status.HTTP_200_OK)
 
 @api_view(['POST'])
 def usercreate(request):
@@ -50,6 +66,79 @@ def usercreate(request):
 
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+# @api_view(['POST'])
+# @parser_classes([MultiPartParser, FormParser])
+# def postcreate(request):
+#     # Deserialize the data from the request
+#     post_data = request.data.get('post', {})
+#     image_data = request.FILES['image']
+
+#     print(image_data)
+
+#     # Serialize the Post data and validate it
+#     post_serializer = PostSerializer(data=post_data)
+#     if post_serializer.is_valid():
+#         # Create the Post object
+#         post = post_serializer.save()
+
+#         # Serialize and create the PostImage objects
+#         created_images = []
+#         for image_item in image_data:
+#             image_serializer = PostImageSerializer(data=image_item)
+#             if image_serializer.is_valid():
+#                 image_serializer.save(post=post)
+#                 created_images.append(image_serializer.data)
+        
+#         # Include the created images in the Post data
+#         post_data['images'] = created_images
+
+#         return Response(post_data, status=status.HTTP_201_CREATED)
+
+#     return Response(post_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+from rest_framework import generics
+
+class postcreate(generics.ListCreateAPIView):
+    queryset = Post.objects.all()
+    serializer_class = PostSerializer
+
+# class postimagecreate(generics.ListCreateAPIView, id):
+#     queryset = PostImage.objects.get(id=id)
+#     serializer_class = Post
+
+
+# @api_view(['GET'])
+# def postlist(request):
+#     posts = Post.objects.all()
+#     data = []
+
+#     for post in posts:
+#         post_data = PostSerializer(post).data
+#         post_images = PostImage.objects.filter(post=post)
+#         post_comments = Comment.objects.filter(post=post)
+#         post_data['comments'] = CommentSerializer(post_comments, many=True).data
+#         post_data['images'] = PostImageSerializer(post_images, many=True).data
+#         data.append(post_data)
+
+#     return Response(data, status=status.HTTP_200_OK)
+
+@api_view(['POST'])
+def commentcreate(request, pk):
+    serializer = CommentSerializer(data=request.data)
+    if serializer.is_valid():
+        serializer.save()
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+@api_view(['GET'])  
+def commentlist(request, pk):
+    comments = Comment.objects.filter(post=pk)
+    data = []
+
+    for comment in comments:
+        comment_data = CommentSerializer(comment).data
+        data.append(comment_data)
+
+    return Response(data, status=status.HTTP_200_OK)
 @api_view(['POST'])
 # @permission_classes([IsAuthenticated])
 def getUsername(request):
