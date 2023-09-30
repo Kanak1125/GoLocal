@@ -2,6 +2,30 @@ import React, { useState } from "react";
 import ToggleSlider from "../Components/ToggleSlider";
 
 const Post = () => {
+  const [formData, setFormData] = useState({
+    location: "",
+    transport: "",
+    restaurant: "",
+    lodging: "",
+    description: "",
+  });
+
+  function handleChange(event) {
+    const { name, type, checked, value } = event.target;
+    setFormData((prevFormData) => {
+      return {
+        ...prevFormData,
+        [name]: type === "checkbox" ? checked : value,
+      };
+    });
+  }
+  console.log(
+    formData.location,
+    formData.transport,
+    formData.restaurant,
+    formData.lodging,
+    formData.description
+  );
   return (
     <div className=' min-h-screen flex items-center justify-center w-full'>
       <div className='container'>
@@ -11,34 +35,70 @@ const Post = () => {
             <div className='loaction-name'>
               <label htmlFor='location'>
                 Location
-                <input type='text' placeholder='Add Location' name='location' />
+                <input
+                  onChange={handleChange}
+                  type='text'
+                  placeholder='Add Location'
+                  value={formData.location}
+                  name='location'
+                />
               </label>
+              <div className='map'>
+                <button className='accent-color text-white font-bold py-2 px-4 rounded-full transition-all duration-300'>
+                  Add location From Map
+                </button>
+              </div>
             </div>
             <div className='select-access'>
               <label htmlFor='transport'>Transport Available</label>
-              <select name='' id='transport'>
+              <select
+                name='transport'
+                id='transport'
+                value={formData.transport}
+                onChange={handleChange}
+              >
                 <option value='public'>Two Wheeler</option>
                 <option value='private'>Four Wheeler</option>
                 <option value='any'>Any</option>
               </select>
 
               <label htmlFor='restaurant'>Restaurant Available</label>
-              <select name='' id='restaurant'>
+              <select
+                name='restaurant'
+                id='restaurant'
+                value={formData.restaurant}
+                onChange={handleChange}
+              >
                 <option value='available'>Available</option>
                 <option value='not-available'>Not Available</option>
               </select>
 
               <label htmlFor='lodging'>Lodging Available</label>
-              <select name='' id='lodging'>
+              <select
+                name='lodging'
+                id='lodging'
+                value={formData.lodging}
+                onChange={handleChange}
+              >
                 <option value='available'>Available</option>
                 <option value='only-few'>Only Few</option>
                 <option value='Not-Available'>Not Available</option>
               </select>
             </div>
+            <div className='discription-field'>
+              <textarea
+                className='w-full px-3 py-2 border rounded-lg focus:ring focus:ring-blue-300 focus:border-blue-500'
+                onChange={handleChange}
+                value={formData.description}
+                placeholder='Description'
+                name='description'
+              />
+            </div>
+            <div className='trek-toggle min-h-screen flex items-center w-full'>
+              <ToggleSlider />
+            </div>
+            <input type='submit' value='Upload' />
           </form>
-        </div>
-        <div className='trek-toggle min-h-screen flex items-center w-full'>
-          <ToggleSlider />
         </div>
       </div>
     </div>
