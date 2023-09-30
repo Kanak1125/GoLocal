@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 const Login = () => {
   const usernameRef = useRef();
   const passwordRef = useRef();
-  const { login } = useAuthContext();
+  const { login, error } = useAuthContext();
   const navigate = useNavigate();
 
   function handleForm(e) {
@@ -14,7 +14,12 @@ const Login = () => {
     
     login(usernameRef.current.value, passwordRef.current.value);
 
-    navigate('/');
+    if (error === "") {
+      navigate('/login');
+      // return;
+    } else {
+      navigate('/');
+    }
   }
 
   return (
@@ -23,6 +28,7 @@ const Login = () => {
         className='border-2 border-white-400 rounded flex flex-col px-4 py-5 w-[80%] md:max-w-[444px]'
         onSubmit={(e) => handleForm(e)}  
       >
+        {error && <p>{error}</p>}
         <h2 className='text-3xl font-medium text-center my-2'>Log In</h2>
         <label htmlFor="username" className='mt-5 mb-2'>Username: </label>
         <input 
