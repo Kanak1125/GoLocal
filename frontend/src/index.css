@@ -52,7 +52,7 @@
   padding: 10px;
   background-color: #fff;
   border-radius: 10px;
-  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 }
 .location-accessbility form {
   display: flex;
@@ -206,4 +206,10 @@
 
 .slider.round:before {
   border-radius: 50%;
+}
+.round {
+  height: 25px;
+  width: 25px;
+  border-radius: 50%;
+  background-color: black;
 }

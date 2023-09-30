@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import MySwiperFull from "../Components/MySwiperFull";
 import WebMap from "../Components/WebMap";
 import PostDetails from "../Components/PostDetails";
+import Sidebar from "../Components/Sidebar";
 
 const Feed = () => {
   const [open, setOpen] = useState(false);
@@ -22,15 +23,9 @@ const Feed = () => {
 
   if (open) document.body.classList.add('overflow-hidden');
   return (
-    <div className="overflow-hidden">
-      {open && <div className="w-full min-h-screen absolute bg-black z-40 flex h-full gap-2">
-          <div className="img-container w-[70%] h-full basis-3/4 ">
-            <MySwiperFull />
-          </div>
-          <div className="basis-1/4 w-full">
-            <WebMap />
-            <PostDetails />
-          </div>
+    <div className="overflow-y-hidden">
+      {open && <div className="w-full min-h-screen absolute bg-black/40 z-40">
+
         </div>  
       }
       <Navbar />
@@ -44,11 +39,10 @@ const Feed = () => {
           Post
         </button>
       </div>
-      <Posts 
-        open={open}
-        openModal={openModal}
-        closeModal={closeModal}
-      />
+      <main className='flex my-8'>
+        <Posts open={open} openModal={openModal} closeModal={closeModal} />
+        <Sidebar />
+      </main>
     </div>
   );
 };
