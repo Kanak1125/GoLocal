@@ -1,8 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import ToggleSlider from "../Components/ToggleSlider";
 import WebMap from "../Components/WebMap";
+import { useAuthContext } from "../context/AuthContext";
+import axios from "axios";
 
 const Post = () => {
+  const { currentUser } = useAuthContext();
   const [formData, setFormData] = useState({
     location: "",
     transport: "",
@@ -10,6 +13,20 @@ const Post = () => {
     lodging: "",
     description: "",
   });
+  const [isChecked, setIsChecked] = React.useState(false);
+  const [diffcult, setDiffcult] = React.useState("");
+  const handleToggle = () => {
+    setIsChecked(!isChecked);
+  };
+  const [images, setImages] = useState([]);
+
+  function handleChangediff(event) {
+    const { checked } = event.target;
+
+    setDiffcult((level) => {
+      level = checked;
+    });
+  }
 
   const [buttonClicked, setButtonClicked] = useState(false);
 
@@ -27,13 +44,62 @@ const Post = () => {
       };
     });
   }
-  //generate a code that posts a state data to api
+  const imageChange = (event) => {
+    if (event.target.files && event.target.files) {
+      setImages(
+        [...event.target.files].map((file) => {
+          return URL.createObjectURL(file);
+        })
+      );
+    }
+    console.log(event.target.files);
+  };
+  console.log(images);
+
+  function getApi() {
+    axios({
+      method: "post",
+      url: "http://127.0.0.1:8000/api/post-create-list/",
+      data: {
+        user: currentUser.user_id,
+        name: formData.location,
+        transportation: formData.transport,
+        restaurant: formData.restaurant,
+        lodging: formData.lodging,
+        trek: isChecked,
+        difficulty: diffcult,
+        description: formData.description,
+        location: null,
+        images: images,
+
+        // id: 1,
+        // user: 1,
+        // name: null,
+        // transportation: null,
+        // restaurant: null,
+        // lodging: null,
+        // trek: false,
+        // difficulty: null,
+        // description: "High",
+        // location: null,
+        // upload_date: null,
+        // images: ["a", "b"],
+      },
+    })
+      .then(() => console.log("Post successfully posted..."))
+      .catch((err) => console.error(`ERROR: ${err}`));
+  }
+
+  function submitData(event) {
+    event.preventDefault();
+    getApi();
+  }
 
   return (
     <div className='min-w-[280px] max-w-[444px] min-h-screen flex items-center justify-center w-full my-4 mx-auto'>
       <div className='container'>
         <div className='location-accessbility'>
-          <form className='py-4 px-2'>
+          <form className='py-4 px-2' onSubmit={submitData}>
             <div className='loaction-name'>
               <label htmlFor='location'>
                 Location
@@ -43,6 +109,7 @@ const Post = () => {
                   placeholder='Add Location'
                   value={formData.location}
                   name='location'
+                  required
                 />
               </label>
               <div className='map mt-3'>
@@ -53,10 +120,10 @@ const Post = () => {
                   Add location From Map
                 </button>
                 {buttonClicked && (
-                <div className="my-4 rounded-md w-full">
-                  <WebMap />
-                </div>
-              )}
+                  <div className='my-4 rounded-md w-full'>
+                    <WebMap />
+                  </div>
+                )}
               </div>
             </div>
             <div className='select-access'>
@@ -68,6 +135,9 @@ const Post = () => {
                 value={formData.transport}
                 onChange={handleChange}
               >
+                <option value='none' selected disabled hidden>
+                  Select a Option
+                </option>
                 <option value='public'>Two Wheeler</option>
                 <option value='private'>Four Wheeler</option>
                 <option value='any'>Any</option>
@@ -106,10 +176,13 @@ const Post = () => {
               Upload image
             </label>
             <input
+              required
+              onChange={imageChange}
               type='file'
               name='image'
               id='upload-img'
               className='hidden'
+              multiple
             />
 
             <div className='discription-field w-full'>
@@ -123,7 +196,12 @@ const Post = () => {
             </div>
             <div className='trek-toggle flex flex-col w-full font-bold mt-2'>
               <label>Trek / Hike?</label>
-              <ToggleSlider />
+              <ToggleSlider
+                check={isChecked}
+                difficulty={diffcult}
+                toggleFunction={handleToggle}
+                changeDiff={handleChangediff}
+              />
             </div>
             <input
               type='submit'
