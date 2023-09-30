@@ -32,12 +32,14 @@ export default function AuthProvider({ children }) {
     //     getApi();
     // }, [currentUser]);
 
-    function postUserToSession() {
+    function postUserToSession(uname) {  
+        console.log("session running");
+        console.log(uname)
         axios({
             method: "post",
             url: "http://127.0.0.1:8000/api/getUsername/",
             data: {
-                "username": currentUser.username,
+                "username": uname,
             }
         })
         .then(() => console.log("Username successfully posted..."))
@@ -59,13 +61,16 @@ export default function AuthProvider({ children }) {
     
             const data = await response.data;
             if (response.status === 200) {
+                console.log("current user");
+                console.log(`${data.access}`);
                 setCurrentUser(jwtDecode(data.access));
+                var username = jwtDecode(data.access).username
                 setUserTokens(data);
             } else {
                 console.error("Alert something went wrong");
             }
             console.log(data);
-            postUserToSession();
+            postUserToSession(username);
             // error while calling this function
             
             setLoading(false);
@@ -78,6 +83,7 @@ export default function AuthProvider({ children }) {
     let logout = () => {
         setError("");
         setCurrentUser(null);
+        postUserToSession(null);
     }
 
     const value = {

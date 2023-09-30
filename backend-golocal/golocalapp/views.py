@@ -15,6 +15,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.hashers import make_password
 from .models import Post, Comment, Like, ExtendUser, PostImage
 
+from django.contrib.auth import logout
 
 
 # Create your views here.
@@ -140,7 +141,6 @@ def commentlist(request, pk):
 
     return Response(data, status=status.HTTP_200_OK)
 @api_view(['POST'])
-# @permission_classes([IsAuthenticated])
 def getUsername(request):
     serializer = UsernameSerializer(data=request.data)
     
@@ -149,14 +149,16 @@ def getUsername(request):
         username = serializer.validated_data.get('username')
         
         try:
-            user = User.objects.get(username=username)
+            if username is None:
+                 logout(username)
+            else:
             # You can set the session of username here
-            request.session['username'] = username
+                request.session['username'] = username
 
-            #access the session
-            username = request.session.get('username')
-            print(f'----------{username}------')
-            return Response({'username': username}, status=status.HTTP_200_OK)
+                #access the session
+                username = request.session.get('username')
+                print(f'API::----+++---{username}------')
+                return Response({'username': username}, status=status.HTTP_200_OK)
         except User.DoesNotExist:
             return Response({'error': 'User does not exist.'}, status=status.HTTP_404_NOT_FOUND)
     else:

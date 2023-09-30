@@ -47,11 +47,15 @@ function LocationMarker() {
   //         map.flyTo(e.latlng, map.getZoom())
   //     },
   // })
+  console.log(position);
   const map = useMap(); // use the useMap hook to access the map instance
   useMapEvents({
     // use the useMapEvents hook to handle map events
     mouseover() {
       map.locate();
+    },
+    click(e) {
+      setPosition(e.latlng);
     },
     locationfound(e) {
       // handle the location found event
