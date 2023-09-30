@@ -54,7 +54,9 @@ INSTALLED_APPS = [
     # 'cloudinary',    
     'golocalapp',
     'rest_framework',
-    'corsheaders'
+    'corsheaders',
+        'django_filters',
+
     
 ]
 
@@ -177,6 +179,7 @@ CORS_ALLOWED_ORIGINS = [
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
+        'django_filters.rest_framework.DjangoFilterBackend',
     )
 }
 
@@ -224,7 +227,7 @@ SIMPLE_JWT = {
     "SLIDING_TOKEN_REFRESH_SERIALIZER": "rest_framework_simplejwt.serializers.TokenRefreshSlidingSerializer",
 }
 
-DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+# DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
 # from dotenv import load_dotenv
 # load_dotenv()

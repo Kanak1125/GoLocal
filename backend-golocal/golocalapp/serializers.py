@@ -75,7 +75,11 @@ class PostSerializer(serializers.ModelSerializer):
 class UsernameSerializer(serializers.Serializer):
     username = serializers.CharField(max_length=1500)
 
-class searchSeralizer(serializers.ModelSerializer):
+# class SearchSerializer(serializers.ModelSerializer):
+#     name = serializers.CharField(max_length=1500)
+#     location = serializers.CharField(max_length=1500)
+
+class SearchSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Post
-        fields = ('id','name','location')
+        model = Post  # Replace with your model name if it's different
+        fields = ('name', 'location')  # Include the fields you want to search

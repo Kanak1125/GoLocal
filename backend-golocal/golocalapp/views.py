@@ -1,14 +1,15 @@
 from django.http import HttpResponse
 from django.shortcuts import render
-from rest_framework import status,viewsets
+from rest_framework import status,viewsets,filters
 
 from rest_framework.decorators import api_view, parser_classes, permission_classes
 from rest_framework.parsers import MultiPartParser, FormParser
 from rest_framework.response import Response  
-from .serializers import UserSerializer, ExtendUserSerializer, CommentSerializer, PostImageSerializer, UsernameSerializer,searchSeralizer,PostSerializer
+from .serializers import UserSerializer, ExtendUserSerializer, CommentSerializer, PostImageSerializer, UsernameSerializer,SearchSerializer,PostSerializer
 
 
 from rest_framework.permissions import IsAuthenticated
+from django.db.models import Q
 
 
 from django.contrib.auth.models import User
@@ -188,12 +189,50 @@ def getUsername(request):
 
    
 
-class searchViewSet(viewsets.ModelViewSet):
-    queryset = Post.objects.all()
-    serializer_class = searchSeralizer
+# class searchViewSet(viewsets.ModelViewSet):
+#     queryset = Post.objects.all()
+#     serializer_class = searchSeralizer
 
-# Define the allowed actions for the viewset
-search_viewset = searchViewSet.as_view({
-    'get': 'list',       # Allow GET requests for listing
-    'post': 'create',    # Allow POST requests for creating
-})
+# # Define the allowed actions for the viewset
+# search_viewset = searchViewSet.as_view({
+#     'get': 'list',       # Allow GET requests for listing
+#     'post': 'create',    # Allow POST requests for creating
+# })
+
+# @api_view(['POST'])
+# def searchcreate(request):
+#     serializer = SearchSerializer(data=request.data)
+ 
+#     if serializer.is_valid():
+#         # Retrieve the username from the serializer
+        
+#         try:
+#             name = serializer.validated_data.get('name')
+#             location = serializer.validated_data.get('location')
+
+#             print(name)
+#             print(location)
+
+#             return Response({'name': name,'location':location}, status=status.HTTP_200_OK)
+#         except User.DoesNotExist:
+#             return Response({'error': 'Value does not exist.'}, status=status.HTTP_404_NOT_FOUND)
+#     else:
+#         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+# class searchcreate(generics.ListCreateAPIView):
+#     search_fields = ['name']
+#     filter_backends = (filters.SearchFilter,)
+#     queryset = Post.objects.all()
+#     serializer_class = SearchSerializer
+
+# class SearchCreateView(generics.ListCreateAPIView):
+#     search_fields = ['name', 'location']  # Include all fields you want to search
+#     filter_backends = (filters.SearchFilter,)
+#     queryset = Post.objects.all()
+#     serializer_class = SearchSerializer
+
+class SearchCreateView(generics.ListCreateAPIView):
+    queryset = Post.objects.all()
+    serializer_class = SearchSerializer
+    filter_fields = ['name', 'location']  # Include all fields you want to search
+    # filter_backends = (filters.SearchFilter,)
