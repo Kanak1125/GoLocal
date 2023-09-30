@@ -59,7 +59,6 @@ def getUsername(request):
         username = serializer.validated_data.get('username')
         
         try:
-            user = User.objects.get(username=username)
             # You can set the session of username here
             request.session['username'] = username
 
@@ -72,7 +71,7 @@ def getUsername(request):
     else:
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
-
+#for testing session
 from django.http import HttpResponse
 
 def checkSession(request):
