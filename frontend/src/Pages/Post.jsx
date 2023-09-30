@@ -27,6 +27,7 @@ const Post = () => {
       };
     });
   }
+  //generate a code that posts a state data to api
 
   return (
     <div className='min-w-[280px] max-w-[444px] min-h-screen flex items-center justify-center w-full my-4 mx-auto'>
@@ -97,9 +98,19 @@ const Post = () => {
                 <option value='Not-Available'>Not Available</option>
               </select>
             </div>
-            
-            <label htmlFor="upload-img" className="accent-color text-white font-bold py-2 px-4 rounded-full transition-all duration-300 mb-4 cursor-pointer align-start">Upload image</label>
-            <input type="file" name="image" id="upload-img" className="hidden"/>
+
+            <label
+              htmlFor='upload-img'
+              className='accent-color text-white font-bold py-2 px-4 rounded-full transition-all duration-300 mb-4 cursor-pointer align-start'
+            >
+              Upload image
+            </label>
+            <input
+              type='file'
+              name='image'
+              id='upload-img'
+              className='hidden'
+            />
 
             <div className='discription-field w-full'>
               <textarea
@@ -114,7 +125,11 @@ const Post = () => {
               <label>Trek / Hike?</label>
               <ToggleSlider />
             </div>
-            <input type='submit' value='Upload' className="accent-color text-white font-bold py-2 px-4 rounded-full transition-all duration-300 mt-5 cursor-pointer"/>
+            <input
+              type='submit'
+              value='Upload'
+              className='accent-color text-white font-bold py-2 px-4 rounded-full transition-all duration-300 mt-5 cursor-pointer'
+            />
           </form>
         </div>
         {buttonClicked && (
