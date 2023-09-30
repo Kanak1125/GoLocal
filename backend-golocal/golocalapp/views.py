@@ -153,7 +153,7 @@ def getUsername(request):
 
             #access the session
             username = request.session.get('username')
-            print(f'----------{username}------')
+            print(f'API::----+++---{username}------')
             return Response({'username': username}, status=status.HTTP_200_OK)
         except User.DoesNotExist:
             return Response({'error': 'User does not exist.'}, status=status.HTTP_404_NOT_FOUND)

@@ -18,5 +18,4 @@ urlpatterns = [
     path('post/<str:pk>/comment-create/', views.commentcreate, name="comment-create"),
     path('post/<str:pk>/comment-list/', views.commentlist, name="comment-list"),
     path('getUsername/', views.getUsername, name="getUsername"),
-    path('checkSession/', views.checkSession, name="checkSession"),
 ]
