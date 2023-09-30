@@ -26,7 +26,7 @@ npm install
 - python -m pip install django-cors-headers
 - pip install djangorestframework-simplejwt
 - pip install argon2-cffi
-
+- pip install pillow
 ## api urls
 - http://127.0.0.1:8000/api/user-create/
 - http://127.0.0.1:8000/api/user-list/
