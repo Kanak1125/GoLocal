@@ -40,8 +40,8 @@ const PostItem = (props) => {
           </div>
           <section className="reacts-section flex gap-5 my-5 mx-2">
             {like ? 
-                <BsHeartFill size={24} className='text-red-500'/> : 
-                <BsHeart size={24} className='text-red-500'/>
+                <BsHeartFill size={24} className='text-red-500 cursor-pointer'  onClick={() => setLike(prevStatus => !prevStatus)}/> : 
+                <BsHeart size={24} className='text-red-500 cursor-pointer' onClick={() => setLike(prevStatus => !prevStatus)}/>
             }
             <div className="flex">
               <FaRegComment size={24} className="cursor-pointer"/>
