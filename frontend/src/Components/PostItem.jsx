@@ -1,18 +1,18 @@
 import React from 'react'
 import MySwiper from "./MySwiper";
-import { FaRegHeart, FaRegComment } from "react-icons/fa";
+import { FaRegHeart, FaRegComment, FaExpandAlt  } from "react-icons/fa";
 
 const PostItem = (props) => {
-    const {open, openModal, closeModal} = props;
+    const {open, openModal, closeModal, itemData} = props;
   return (
-    <div className='posts container bg-white max-w-[576px] ternary-color rounded-lg py-3 px-5 mx-auto cursor-pointer' onClick={openModal}>
+    <div className='posts container bg-white  ternary-color rounded-lg py-3 px-5 mx-auto my-8 ' >
       <div className='post-detail flex justify-between '>
         <div className="flex gap-4">
           <div className="w-[32px] h-[32px] rounded-full accent-color"></div>
-          <p className='username font-bold'>Ace</p>
+          <p className='username font-bold'>{itemData.name}</p>
         </div>
         <p className='time accent-text-color'>
-          <span className="text-sm">Yesterday at 12PM</span>
+          <span className="text-sm flex items-center">{itemData.upload_date} <FaExpandAlt size={24} onClick={openModal} className='ml-4'/></span>
         </p>
       </div>
 
@@ -27,14 +27,12 @@ const PostItem = (props) => {
         <div className='location-discription-map '>
           <div>
             <p className='post-description text-start text-sm py-8 px-2'>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis
-              laborum quisquam recusandae, itaque ipsa cupiditate eligendi fuga
-              id fugit, obcaecat.
+              {itemData.description}
             </p>
           </div>
           <div className='post-details list-item list-inside list-none text-center font-medium'>
             <ul className="flex">
-              <li className="py-2 px-4 secondary-color rounded-full mr-4 ">Resturants</li>
+              <li className="py-2 px-4 secondary-color rounded-full mr-4 ">Lodging</li>
               <li className="py-2 px-4 secondary-color rounded-full mr-4 ">Resturants</li>
             </ul>
           </div>

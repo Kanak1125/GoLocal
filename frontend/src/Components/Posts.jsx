@@ -30,7 +30,15 @@ const Post = (props) => {
   }, []);
 
   const { open, openModal, closeModal } = props;
-  return <PostItem open={open} openModal={openModal} closeModal={closeModal} />;
+  const postItems = data.map((item, idx)=> {
+    return <PostItem key={idx} open={open} openModal={openModal} closeModal={closeModal} itemData={item} />
+  })
+
+  return (
+    <div className="mx-auto max-w-[676px]">
+      {postItems}
+    </div>
+  );
 };
 
 export default Post;

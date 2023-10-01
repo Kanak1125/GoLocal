@@ -3,7 +3,7 @@ import Posts from "./Posts";
 
 const Sidebar = () => {
   return (
-    <div className='sidebar bg-gray-100 py-4 px-3 rounded-lg mr-6'>
+    <div className='sidebar bg-gray-100 py-4 px-3 rounded-lg mr-6 max-content-height'>
       <div className='explore-container flex items-center bg-white p-4 rounded-md'>
         <div className='circle w-[40px] min-w-[40px] h-[40px] rounded-full accent-color overflow-hidden'>
           <img
@@ -64,7 +64,24 @@ const Sidebar = () => {
                   className='w-full h-full '
                 />
               </div>
-              <div className='post-title ml-5'>Title 1</div>
+              <div className='post-title ml-5'>Dhulikhel</div>
+            </div>
+          </div>
+          <div className='post-date block mt-2 text-sm'>
+            <p>Today 6 AM</p>
+          </div>
+        </div>
+        <div className='my-3 bg-white p-4 rounded-md'>
+          <div className='recent-post flex'>
+            <div className='title flex items-center'>
+              <div className='circle w-[32px] h-[32px] rounded-full accent-color overflow-hidden'>
+                <img
+                  src='https://static.vecteezy.com/system/resources/thumbnails/019/900/322/small/happy-young-cute-illustration-face-profile-png.png'
+                  alt=''
+                  className='w-full h-full '
+                />
+              </div>
+              <div className='post-title ml-5'>Patan</div>
             </div>
           </div>
           <div className='post-date block mt-2 text-sm'>
@@ -81,28 +98,11 @@ const Sidebar = () => {
                   className='w-full h-full '
                 />
               </div>
-              <div className='post-title ml-5'>Title 1</div>
+              <div className='post-title ml-5'>Banepa</div>
             </div>
           </div>
           <div className='post-date block mt-2 text-sm'>
-            <p>Yesterday 12 PM</p>
-          </div>
-        </div>
-        <div className='my-3 bg-white p-4 rounded-md'>
-          <div className='recent-post flex'>
-            <div className='title flex items-center'>
-              <div className='circle w-[32px] h-[32px] rounded-full accent-color overflow-hidden'>
-                <img
-                  src='https://static.vecteezy.com/system/resources/thumbnails/019/900/322/small/happy-young-cute-illustration-face-profile-png.png'
-                  alt=''
-                  className='w-full h-full '
-                />
-              </div>
-              <div className='post-title ml-5'>Title 1</div>
-            </div>
-          </div>
-          <div className='post-date block mt-2 text-sm'>
-            <p>Yesterday 12 PM</p>
+            <p>Last week, 8 PM</p>
           </div>
         </div>
       </div>

@@ -36,6 +36,9 @@
   .ternary-color {
     background-color: hsl(138, 100%, 93%);
   }
+  .max-content-height {
+    height: max-content;
+  }
 }
 .container {
   z-index: 10;
