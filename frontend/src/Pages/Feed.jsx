@@ -17,15 +17,27 @@ const Feed = () => {
 
   function closeModal() {
     setOpen(false);
+    document.body.classList.remove('overflow-hidden');
+
   }
 
   const navigate = useNavigate();
 
   if (open) document.body.classList.add('overflow-hidden');
   return (
-    <div className="overflow-y-hidden">
-      {open && <div className="w-full min-h-screen absolute bg-black/40 z-40">
-
+    <div className="">
+      {open && <div className="w-full min-h-full absolute bg-black/40 z-40 flex">
+        <div className="img-container w-[70%] h-screen relative">
+          <button 
+            className="w-[32px] h-[32px] rounded-full accent-color absolute z-50 right-2 top-2"
+            onClick={closeModal}
+            >X</button>
+            <MySwiperFull />
+          </div>
+          <div className="w-[30%]">
+            <WebMap />
+            <PostDetails />
+          </div>
         </div>  
       }
       <Navbar />

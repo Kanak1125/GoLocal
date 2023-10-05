@@ -1,9 +1,11 @@
-import React from 'react'
+import React, { useState } from 'react'
 import MySwiper from "./MySwiper";
-import { FaRegHeart, FaRegComment, FaExpandAlt  } from "react-icons/fa";
+import { FaRegComment, FaExpandAlt  } from "react-icons/fa";
+import { BsHeart, BsHeartFill} from "react-icons/bs";
 
 const PostItem = (props) => {
     const {open, openModal, closeModal, itemData} = props;
+    const [like, setLike] = useState(false);
   return (
     <div className='posts container bg-white  ternary-color rounded-lg py-3 px-5 mx-auto my-8 ' >
       <div className='post-detail flex justify-between '>
@@ -37,7 +39,10 @@ const PostItem = (props) => {
             </ul>
           </div>
           <section className="reacts-section flex gap-5 my-5 mx-2">
-            <FaRegHeart size={24}/>
+            {like ? 
+                <BsHeartFill size={24} className='text-red-500 cursor-pointer'  onClick={() => setLike(prevStatus => !prevStatus)}/> : 
+                <BsHeart size={24} className='text-red-500 cursor-pointer' onClick={() => setLike(prevStatus => !prevStatus)}/>
+            }
             <div className="flex">
               <FaRegComment size={24} className="cursor-pointer"/>
               <span className="ml-2 cursor-pointer">12</span>

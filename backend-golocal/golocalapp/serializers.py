@@ -63,7 +63,7 @@ class PostSerializer(serializers.ModelSerializer):
     #     for image in uploaded_images:
     #         newpost_image = PostImage.objects.create(post=post, image=image)
 
-    #     return post
+        # return post
     # def get_total_likes(self, obj):
     #     return obj.total_likes()
     # class Meta:
@@ -76,9 +76,6 @@ class PostSerializer(serializers.ModelSerializer):
 class UsernameSerializer(serializers.Serializer):
     username = serializers.CharField(max_length=1500)
 
-# class SearchSerializer(serializers.ModelSerializer):
-#     name = serializers.CharField(max_length=1500)
-#     location = serializers.CharField(max_length=1500)
 
 class SearchSerializer(serializers.ModelSerializer):
     class Meta:

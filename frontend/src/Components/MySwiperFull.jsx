@@ -22,7 +22,7 @@ const swiperSlides = imgArr.map((img, index) => {
     )
   })
 
-const MySwiper = () => {
+const MySwiperFull = () => {
   return (
     <Swiper
         // install Swiper modules
@@ -42,4 +42,4 @@ const MySwiper = () => {
   )
 }
 
-export default MySwiper
+export default MySwiperFull

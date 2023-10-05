@@ -7,7 +7,7 @@ const Sidebar = () => {
       <div className='explore-container flex items-center bg-white p-4 rounded-md'>
         <div className='circle w-[40px] min-w-[40px] h-[40px] rounded-full accent-color overflow-hidden'>
           <img
-            src='https://static.vecteezy.com/system/resources/thumbnails/019/900/322/small/happy-young-cute-illustration-face-profile-png.png'
+            src='https://www.pngall.com/wp-content/uploads/8/Vector-Search-PNG-Image.png'
             alt=''
             className='w-full h-full '
           />
