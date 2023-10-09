@@ -16,7 +16,7 @@ const PostItem = (props) => {
           <p className='username font-bold'>{itemData.name}</p>
         </div>
         <p className='time accent-text-color'>
-          <span className="text-sm flex items-center">{itemData.upload_date} <FaExpandAlt size={24} onClick={openModal} className='ml-4'/></span>
+          <span className="text-sm flex items-center">{itemData.upload_date} <FaExpandAlt size={24} onClick={openModal} className='ml-4 cursor-pointer'/></span>
         </p>
       </div>
 
