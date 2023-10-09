@@ -2,9 +2,11 @@ import React, { useState } from 'react'
 import MySwiper from "./MySwiper";
 import { FaRegComment, FaExpandAlt  } from "react-icons/fa";
 import { BsHeart, BsHeartFill} from "react-icons/bs";
+import { useAuthContext } from '../context/AuthContext';
 
 const PostItem = (props) => {
     const {open, openModal, closeModal, itemData} = props;
+    const { currentUser } = useAuthContext();
     const [like, setLike] = useState(false);
   return (
     <div className='posts container bg-white  ternary-color rounded-lg py-3 px-5 mx-auto my-8 ' >
