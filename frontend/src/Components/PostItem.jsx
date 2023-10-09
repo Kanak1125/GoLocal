@@ -9,7 +9,7 @@ const PostItem = (props) => {
     const { currentUser } = useAuthContext();
     const [like, setLike] = useState(false);
   return (
-    <div className='posts container bg-white  ternary-color rounded-lg py-3 px-5 mx-auto my-8 ' >
+    <div className='posts container bg-gray-100 rounded-lg py-3 px-5 mx-auto my-8 ' >
       <div className='post-detail flex justify-between '>
         <div className="flex gap-4">
           <div className="w-[32px] h-[32px] rounded-full accent-color"></div>

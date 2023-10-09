@@ -121,7 +121,7 @@ const Post = () => {
                 </button>
                 {buttonClicked && (
                   <div className='my-4 rounded-md w-full'>
-                    <WebMap />
+                    <WebMap height={'300px'}/>
                   </div>
                 )}
               </div>

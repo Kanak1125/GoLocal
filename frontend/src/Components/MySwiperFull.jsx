@@ -15,9 +15,9 @@ const imgArr = [
 
 const swiperSlides = imgArr.map((img, index) => {
     return (
-      <SwiperSlide key={index} className='h-full'>
-        <img src={img} alt="" className={`h-full w-full object-contain object-bottom bg-black`}/>
-        <div className='w-full h-full '></div>
+      <SwiperSlide key={index} className='overflow-hidden bg-black rounded '>
+        <img src={img} alt="" className={`h-[400px] md:h-[90vh] max-w-[444px] w-full object-contain object-center mx-auto`}/>
+        {/* <div className='w-full h-full '></div> */}
       </SwiperSlide>
     )
   })
@@ -31,10 +31,10 @@ const MySwiperFull = () => {
         slidesPerView={1}
         navigation
         loop={true}
-        autoplay={{
-          delay: 10000, 
-          disableOnInteraction: false
-        }}
+        // autoplay={{
+        //   delay: 10000, 
+        //   disableOnInteraction: false
+        // }}
         pagination={{ clickable: true }}
       >
         {swiperSlides}
