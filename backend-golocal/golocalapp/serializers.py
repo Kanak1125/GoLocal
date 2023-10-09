@@ -41,23 +41,34 @@ class CommentSerializer(serializers.ModelSerializer):
 
 
 class PostSerializer(serializers.ModelSerializer):
-    images = PostImageSerializer(many=True, read_only=True)
-    uploaded_images = serializers.ListField(
-        child = serializers.ImageField(max_length=1000000, allow_empty_file=False, use_url=False),
-        write_only=True 
-    )
-   
+    # images = PostImageSerializer(many=True, read_only=True)
+    # uploaded_images = serializers.ListField(
+    #     child = serializers.ImageField(max_length=1000000, allow_empty_file=False, use_url=False),
+    #     write_only=True 
+    # )
+    # total_likes = serializers.SerializerMethodField()
+    # comments = CommentSerializer(many=True, read_only=True)
+    # uploaded_images = serializers.ListField(
+    #     child=serializers.ImageField(max_length=1000000, allow_empty_file=False, use_url=False),
+    #     write_only=True
+    # )
     class Meta:
         model = Post
-        fields = ['id', 'user', 'name', 'transportation', 'restaurant', 'lodging', 'trek', 'difficulty', 'description', 'location','upload_date','images', 'uploaded_images']
+        # fields = ['id', 'user', 'name', 'transportation', 'restaurant', 'lodging', 'trek', 'difficulty', 'description', 'location','upload_date','images', 'uploaded_images']
+        fields = ['id', 'user', 'name', 'transportation', 'restaurant', 'lodging', 'trek', 'difficulty', 'description', 'location','upload_date']
 
-    def create(self, validated_data):
-        uploaded_images = validated_data.pop('uploaded_images')
-        post = Post.objects.create(**validated_data)
-        for image in uploaded_images:
-            newpost_image = PostImage.objects.create(post=post, image=image)
+    # def create(self, validated_data):
+    #     uploaded_images = validated_data.pop('uploaded_images')
+    #     post = Post.objects.create(**validated_data)
+    #     for image in uploaded_images:
+    #         newpost_image = PostImage.objects.create(post=post, image=image)
 
-        return post
+        # return post
+    # def get_total_likes(self, obj):
+    #     return obj.total_likes()
+    # class Meta:
+    #     model = Post
+    #     fields = '__all__'
 
 
 
