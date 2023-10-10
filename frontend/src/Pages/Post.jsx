@@ -85,7 +85,7 @@ const Post = () => {
   //     .catch((err) => console.error(`ERROR: ${err}`));
   axios.post('http://127.0.0.1:8000/api/post-create-list/', formData, {
   headers: {
-    'Content-Type': 'application/json'
+    'Content-Type': 'multipart/form-data'
   }
 }).then(res => {
   console.log(res);
@@ -99,7 +99,7 @@ const Post = () => {
     <div className='min-w-[280px] max-w-[444px] min-h-screen flex items-center justify-center w-full my-4 mx-auto'>
       <div className='container'>
         <div className='location-accessbility'>
-          <form className='py-4 px-2' onSubmit={submitData}>
+          <form className='py-4 px-2' encType="multipart/form-data" onSubmit={submitData}>
             <div className='loaction-name'>
               <label htmlFor='location'>
                 Location
