@@ -84,14 +84,14 @@ function LocationMarker() {
 //   return <Marker position={marker}></Marker>;
 // };
 
-const WebMap = () => {
+const WebMap = ({height}) => {
   return (
     <MapContainer
       center={initPosition}
       zoom={13}
       scrollWheelZoom={true}
       whenReady={() => {}}
-      style={{ height: "300px", width: "100%" }}
+      style={{ height, width: "100%", borderRadius: "5px" }}
     >
       <TileLayer
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'

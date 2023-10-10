@@ -7,6 +7,7 @@ import MySwiperFull from "../Components/MySwiperFull";
 import WebMap from "../Components/WebMap";
 import PostDetails from "../Components/PostDetails";
 import Sidebar from "../Components/Sidebar";
+import MyModal from "../Components/MyModal";
 
 const Feed = () => {
   const [open, setOpen] = useState(false);
@@ -26,19 +27,21 @@ const Feed = () => {
   if (open) document.body.classList.add('overflow-hidden');
   return (
     <div className="">
-      {open && <div className="w-full min-h-full absolute bg-black/40 z-40 flex">
-        <div className="img-container w-[70%] h-screen relative">
-          <button 
-            className="w-[32px] h-[32px] rounded-full accent-color absolute z-50 right-2 top-2"
-            onClick={closeModal}
-            >X</button>
-            <MySwiperFull />
+      {open && <MyModal >
+        <button 
+          className="w-[32px] h-[32px] rounded-full accent-color absolute z-50 right-3 top-3 md:left-4"
+          onClick={closeModal}
+        >X</button>
+        <div className="img-container w-full md:w-[70%] md:h-screen relative py-5 px-8 bg-white">
+            {/* <div className="h-full"> */}
+              <MySwiperFull />
+            {/* </div> */}
           </div>
-          <div className="w-[30%]">
-            <WebMap />
+          <div className="md:w-[30%] p-7 md:p-5">
+            <WebMap height={'300px'}/>
             <PostDetails />
           </div>
-        </div>  
+      </MyModal>
       }
       <Navbar />
       {/* <Post /> */}

@@ -2,19 +2,21 @@ import React, { useState } from 'react'
 import MySwiper from "./MySwiper";
 import { FaRegComment, FaExpandAlt  } from "react-icons/fa";
 import { BsHeart, BsHeartFill} from "react-icons/bs";
+import { useAuthContext } from '../context/AuthContext';
 
 const PostItem = (props) => {
     const {open, openModal, closeModal, itemData} = props;
+    const { currentUser } = useAuthContext();
     const [like, setLike] = useState(false);
   return (
-    <div className='posts container bg-white  ternary-color rounded-lg py-3 px-5 mx-auto my-8 ' >
+    <div className='posts container bg-gray-100 rounded-lg py-3 px-5 mx-auto my-8 ' >
       <div className='post-detail flex justify-between '>
         <div className="flex gap-4">
           <div className="w-[32px] h-[32px] rounded-full accent-color"></div>
           <p className='username font-bold'>{itemData.name}</p>
         </div>
         <p className='time accent-text-color'>
-          <span className="text-sm flex items-center">{itemData.upload_date} <FaExpandAlt size={24} onClick={openModal} className='ml-4'/></span>
+          <span className="text-sm flex items-center">{itemData.upload_date} <FaExpandAlt size={24} onClick={openModal} className='ml-4 cursor-pointer'/></span>
         </p>
       </div>
 

@@ -13,6 +13,7 @@ const Post = () => {
     lodging: "",
     description: "",
   });
+  console.log(formData);
   const [isChecked, setIsChecked] = React.useState(false);
   const [diffcult, setDiffcult] = React.useState("");
   const handleToggle = () => {
@@ -72,17 +73,27 @@ const Post = () => {
     formPayload.append("description", formData.description);
     formPayload.append("transport", formData.transport);
     formPayload.append("image", images);
-    axios({
-      method: 'post',
-      url: 'http://127.0.0.1:8000/api/post-create-list/',
-      formData,
-      headers :{
-        "Content-Type": "multipart/form-data"
-      },
-    })
-      .then(() => console.log("Post successfully posted..."))
-      .catch((err) => console.error(`ERROR: ${err}`));
+  //   axios({
+  //     method: 'post',
+  //     url: 'http://127.0.0.1:8000/api/post-create-list/',
+  //     formData,
+  //     headers :{
+  //       "Content-Type": "multipart/form-data"
+  //     },
+  //   })
+  //     .then(() => console.log("Post successfully posted..."))
+  //     .catch((err) => console.error(`ERROR: ${err}`));
+  axios.post('http://127.0.0.1:8000/api/post-create-list/', formData, {
+  headers: {
+    'Content-Type': 'application/json'
   }
+}).then(res => {
+  console.log(res);
+}).catch(err => {
+  console.log(err);
+});
+  }
+
 
   return (
     <div className='min-w-[280px] max-w-[444px] min-h-screen flex items-center justify-center w-full my-4 mx-auto'>
@@ -110,7 +121,7 @@ const Post = () => {
                 </button>
                 {buttonClicked && (
                   <div className='my-4 rounded-md w-full'>
-                    <WebMap />
+                    <WebMap height={'300px'}/>
                   </div>
                 )}
               </div>
