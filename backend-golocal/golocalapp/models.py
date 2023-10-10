@@ -25,6 +25,8 @@ class Post(models.Model):
     
     difficulty = models.CharField(max_length=100, blank=True,null=True)
 
+    image = models.ImageField(upload_to='post_pictures/', blank=True, null=True)
+
     location = models.CharField(max_length=100, blank=True, null=True)
     upload_date = models.DateTimeField(auto_now_add=True, blank=True, null=True)
 
