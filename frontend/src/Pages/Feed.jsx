@@ -46,16 +46,21 @@ const Feed = () => {
       <Navbar />
       {/* <Post /> */}
 
-      <div className='max-w-[576px] my-5 mx-auto'>
-        <button
-          onClick={() => navigate("/post")}
-          className='accent-color text-white font-bold py-2 px-4 rounded-full transition-all duration-300 w-full '
-        >
-          Post
-        </button>
-      </div>
-      <main className='flex my-8'>
-        <Posts open={open} openModal={openModal} closeModal={closeModal} />
+      <main className='flex justify-center my-8 border-2 border-red-400 gap-8 max-w-[1400px] mx-auto'>
+        <div className="feed flex flex-col break-words break-all px-3">
+          <div className='mx-auto flex flex-col
+          gap-4 items-center justify-between w-full p-5 rounded-lg bg-gray-100 sm:flex-row'>
+            <div className="w-[40px] min-w-[40px] h-[40px] mx-2 rounded-full accent-color"></div>
+            <p className='username font-bold'>Wanna post something?</p>
+            <button
+            onClick={() => navigate("/post")}
+            className='w-full h-[40px] accent-color text-white font-bold rounded-full transition-all duration-300 sm:w-[100px]'
+            >
+            Post
+            </button>
+          </div>
+          <Posts open={open} openModal={openModal} closeModal={closeModal} />
+        </div>
         <Sidebar />
       </main>
     </div>

@@ -9,22 +9,26 @@ const PostItem = (props) => {
     const { currentUser } = useAuthContext();
     const [like, setLike] = useState(false);
   return (
-    <div className='posts container bg-gray-100 rounded-lg py-3 px-5 mx-auto my-8 ' >
-      <div className='post-detail flex justify-between '>
-        <div className="flex gap-4">
-          <div className="w-[32px] h-[32px] rounded-full accent-color"></div>
-          <p className='username font-bold'>{itemData.name}</p>
+    <div className='posts container bg-gray-100 rounded-lg py-3 px-5 mx-auto my-8 '>
+      <div className='post-detail flex justify-between items-center gap-2'>
+        <div className="w-[32px] min-w-[32px] h-[32px] rounded-full accent-color"></div>
+        <div className='w-full flex flex-col justify-between ml-2 sm:items-center sm:flex-row'>
+          <div className="flex flex-col md:ml-4">
+            <p className='username font-bold'>{itemData.name}</p>
+            <p className='username text-sm'>{itemData.name}</p>
+          </div>
+          <p className='time accent-text-color text-sm max-w-[120px] mt-2 sm:mt-0'>
+            {itemData.upload_date} 
+          </p>
         </div>
-        <p className='time accent-text-color'>
-          <span className="text-sm flex items-center">{itemData.upload_date} <FaExpandAlt size={24} onClick={openModal} className='ml-4 cursor-pointer'/></span>
-        </p>
+        <FaExpandAlt size={24} onClick={openModal} className='ml-4 cursor-pointer accent-text-color'/>
       </div>
 
       <hr className="mt-3 rounded border-secondary"/>
 
       <div className='post-info '>
         <div className='location-img-detail '>
-          <div className='post-image my-5 bg-white rounded-md overflow-hidden'>
+          <div className='post-image my-5 bg-black rounded-md overflow-hidden'>
             <MySwiper />
           </div>
         </div>

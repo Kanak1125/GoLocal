@@ -35,7 +35,7 @@ const Post = (props) => {
   })
 
   return (
-    <div className="mx-auto max-w-[676px]">
+    <div className="mx-auto max-w-[676px] ">
       {postItems}
     </div>
   );
