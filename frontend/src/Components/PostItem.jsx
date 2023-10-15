@@ -27,11 +27,11 @@ const PostItem = (props) => {
       <hr className="mt-3 rounded border-secondary"/>
 
       <div className='post-info '>
-        <div className='location-img-detail '>
+        {/* <div className='location-img-detail '> */}
           <div className='post-image my-5 bg-black rounded-md overflow-hidden'>
             <MySwiper />
           </div>
-        </div>
+        {/* </div> */}
         <div className='location-discription-map '>
           <div>
             <p className='post-description text-start text-sm py-8 px-2'>
@@ -39,16 +39,19 @@ const PostItem = (props) => {
             </p>
           </div>
           <div className='post-details list-item list-inside list-none text-center font-medium'>
-            <ul className="flex">
-              <li className="py-2 px-4 secondary-color rounded-full mr-4 ">Lodging</li>
-              <li className="py-2 px-4 secondary-color rounded-full mr-4 ">Resturants</li>
+            <ul className="flex break-keep flex-wrap gap-4">
+              <li className="py-2 px-4 secondary-color rounded-full ">Lodging</li>
+              <li className="py-2 px-4 secondary-color rounded-full ">Resturants</li>
             </ul>
           </div>
           <section className="reacts-section flex gap-5 my-5 mx-2">
+          <div className='flex'>
             {like ? 
                 <BsHeartFill size={24} className='text-red-500 cursor-pointer'  onClick={() => setLike(prevStatus => !prevStatus)}/> : 
                 <BsHeart size={24} className='text-red-500 cursor-pointer' onClick={() => setLike(prevStatus => !prevStatus)}/>
             }
+              <span className="cursor-pointer ml-2">45</span>
+            </div>
             <div className="flex">
               <FaRegComment size={24} className="cursor-pointer"/>
               <span className="ml-2 cursor-pointer">12</span>

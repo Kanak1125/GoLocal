@@ -46,8 +46,8 @@ const Feed = () => {
       <Navbar />
       {/* <Post /> */}
 
-      <main className='flex justify-center my-8 border-2 border-red-400 gap-8 max-w-[1400px] mx-auto'>
-        <div className="feed flex flex-col break-words break-all px-3">
+      <main className='flex justify-center my-8 gap-8 max-w-[1400px] mx-auto'>
+        <div className="feed flex flex-col break-words break-all px-3 w-full md:w-[70%]">
           <div className='mx-auto flex flex-col
           gap-4 items-center justify-between w-full p-5 rounded-lg bg-gray-100 sm:flex-row'>
             <div className="w-[40px] min-w-[40px] h-[40px] mx-2 rounded-full accent-color"></div>

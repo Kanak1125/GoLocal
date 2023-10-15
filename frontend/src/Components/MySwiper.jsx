@@ -18,8 +18,9 @@ const imgArr = [
 
 const swiperSlides = imgArr.map((img, index) => {
     return (
-      <SwiperSlide key={index} className='w-[200px] h-[400px] overflow-hidden'>
-        <img src={img} alt="" className={`h-[400px] w-full object-contain object-center bg-black select-none`}/>
+      <SwiperSlide key={index} className='overflow-hidden h-[400px]'>
+        <img src={img} alt="" className={`h-[240px] sm:h-[400px] w-full object-contain object-center select-none`}/>
+        {/* <div className='w-full h-full '></div> */}
       </SwiperSlide>
     )
   })
