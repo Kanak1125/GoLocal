@@ -3,11 +3,17 @@ import MySwiper from "./MySwiper";
 import { FaRegComment, FaExpandAlt  } from "react-icons/fa";
 import { BsHeart, BsHeartFill} from "react-icons/bs";
 import { useAuthContext } from '../context/AuthContext';
+import formatTimeAgo from '../modules/timeAgo';
 
 const PostItem = (props) => {
     const {open, openModal, closeModal, itemData} = props;
     const { currentUser } = useAuthContext();
     const [like, setLike] = useState(false);
+
+    const currentDate = new Date(itemData.upload_date);
+    // console.log(formatTimeAgo(currentDate));
+    const formattedDiffTime = formatTimeAgo(currentDate);
+  
   return (
     <div className='posts container bg-gray-100 rounded-lg py-3 px-5 mx-auto my-8 '>
       <div className='post-detail flex justify-between items-center gap-2'>
@@ -18,7 +24,7 @@ const PostItem = (props) => {
             <p className='username text-sm'>{itemData.name}</p>
           </div>
           <p className='time accent-text-color text-sm max-w-[120px] mt-2 sm:mt-0'>
-            {itemData.upload_date} 
+            {formattedDiffTime} 
           </p>
         </div>
         <FaExpandAlt size={24} onClick={openModal} className='ml-4 cursor-pointer accent-text-color'/>

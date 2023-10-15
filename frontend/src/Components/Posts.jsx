@@ -6,6 +6,7 @@ const Post = (props) => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  console.log(data);
   useEffect(() => {
     setLoading(true);
 
