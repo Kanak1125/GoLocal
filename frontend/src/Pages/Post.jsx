@@ -120,47 +120,82 @@ const Post = () => {
               </div>
             </div>
             <div className='select-access'>
-              <label htmlFor='transport'>Transport Available</label>
-              <select
-                name='transport'
-                id='transport'
-                className='mb-4'
-                value={formData.transport}
-                onChange={handleChange}
-              >
-                <option value='none' selected disabled hidden>
-                  Select a Option
-                </option>
-                <option value='public'>Two Wheeler</option>
-                <option value='private'>Four Wheeler</option>
-                <option value='any'>Any</option>
-              </select>
+                <div className="transport-access flex items-center mb-4">
+                  <p className="mr-2">Transport</p>
+                  <input
+                    type="radio"
+                    id="two-wheeler"
+                    name="transport"
+                    value="Two-Wheeler"
+                    checked={formData.transport === "Two-Wheeler"}
+                    onChange={handleChange}
+                    className="mr-1"
+                  />
+                  <label htmlFor="two-wheeler" className="mr-4 cursor-pointer">Two-Wheeler</label>
 
-              <label htmlFor='restaurant'>Restaurant Available</label>
-              <select
-                name='restaurant'
-                id='restaurant'
-                className='mb-4'
-                value={formData.restaurant}
-                onChange={handleChange}
-              >
-                <option value='Resturant '>Available</option>
-                <option value=''>Not Available</option>
-              </select>
+                  <input
+                    type="radio"
+                    id="any"
+                    name="transport"
+                    value="Any"
+                    checked={formData.transport === "Any"}
+                    onChange={handleChange}
+                    className="mr-1"
+                  />
+                  <label htmlFor="any" className="cursor-pointer">Any</label>
+                </div>
 
-              <label htmlFor='lodging'>Lodging Available</label>
-              <select
-                name='lodging'
-                id='lodging'
-                className='mb-4'
-                value={formData.lodging}
-                onChange={handleChange}
-              >
-                <option value='Lodging available'>Available</option>
-                <option value='only-few'>Only Few</option>
-                <option value=''>Not Available</option>
-              </select>
-            </div>
+                <div className="restaurant-access flex items-center mb-4">
+                  <p className="mr-2">Restaurant</p>
+                  <input
+                    type="radio"
+                    id="restaurant-available"
+                    name="restaurant"
+                    value="RestaurantAvailable"
+                    checked={formData.restaurant === "RestaurantAvailable"}
+                    onChange={handleChange}
+                    className="mr-1"
+                  />
+                  <label htmlFor="restaurant-available" className="mr-4 cursor-pointer">Restaurant Available</label>
+
+                  <input
+                    type="radio"
+                    id="restaurant-not-available"
+                    name="restaurant"
+                    value="RestaurantNotAvailable"
+                    checked={formData.restaurant === "RestaurantNotAvailable"}
+                    onChange={handleChange}
+                    className="mr-1"
+                  />
+                  <label htmlFor="restaurant-not-available" className="cursor-pointer">Restaurant Not Available</label>
+                </div>
+
+                <div className="stay-access flex items-center">
+                  <p className="mr-2">Hotels</p>
+                  <input
+                    type="radio"
+                    id="hotels-available"
+                    name="lodging"
+                    value="HotelsAvailable"
+                    checked={formData.lodging === "HotelsAvailable"}
+                    onChange={handleChange}
+                    className="mr-1"
+                  />
+                  <label htmlFor="hotels-available" className="mr-4 cursor-pointer">Hotels Available</label>
+
+                  <input
+                    type="radio"
+                    id="hotels-not-available"
+                    name="lodging"
+                    value="HotelsNotAvailable"
+                    checked={formData.lodging === "HotelsNotAvailable"}
+                    onChange={handleChange}
+                    className="mr-1"
+                  />
+                  <label htmlFor="hotels-not-available" className="cursor-pointer">Hotels Not Available</label>
+                </div>
+              </div>
+
 
             <label
               htmlFor='upload-img'
