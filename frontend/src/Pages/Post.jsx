@@ -12,14 +12,17 @@ const Post = () => {
     restaurant: "",
     lodging: "",
     description: "",
+    image_url: [],
   });
-  console.log(formData.transport);
+
+  // const [errors, setErrors] = useState("");
+
+  console.log(formData);
   const [isChecked, setIsChecked] = React.useState(false);
   const [diffcult, setDiffcult] = React.useState("");
   const handleToggle = () => {
     setIsChecked(!isChecked);
   };
-  const [images, setImages] = useState([]);
 
   function handleChangediff(event) {
     const { checked } = event.target;
@@ -46,25 +49,25 @@ const Post = () => {
     });
   }
 
-  useEffect(() => {
-    console.log(images);
-  }, [images])
-
-  const imageChange = (event) => {
-    if (event.target.files && event.target.files) {
-      setImages(
-        [...event.target.files].map((file) => {
-          // return URL.createObjectURL(file);
-          return file;
-        })
-      );
+  const handleImageChange = (event) => {
+    if (event.target.files) {
+      setFormData((prevFormData) => {
+        return {
+          ...prevFormData,
+          image_url: event.target.files[0],
+        }
+      })
     }
     console.log(event.target.files);
   };
-  console.log(images);
+  // console.log(images);
 
-  function submitData(event) {
+  const submitData = async (event) => {
     event.preventDefault();
+    // const response = await API.createMyModelEntry(formData);
+    // if (response.status === 400) {
+    //   setErrors("Invalid data");
+    // }
     const formPayload = new FormData();
     formPayload.append("location", formData.location);
     formPayload.append("restaurant", formData.restaurant);
@@ -72,34 +75,24 @@ const Post = () => {
     formPayload.append("difficuty", diffcult);
     formPayload.append("description", formData.description);
     formPayload.append("transport", formData.transport);
-    formPayload.append("image", images);
-  //   axios({
-  //     method: 'post',
-  //     url: 'http://127.0.0.1:8000/api/post-create-list/',
-  //     formData,
-  //     headers :{
-  //       "Content-Type": "multipart/form-data"
-  //     },
-  //   })
-  //     .then(() => console.log("Post successfully posted..."))
-  //     .catch((err) => console.error(`ERROR: ${err}`));
-  axios.post('http://127.0.0.1:8000/api/post-create-list/', formData, {
-  headers: {
-    'Content-Type': 'application/json'
-  }
-}).then(res => {
-  console.log(res);
-}).catch(err => {
-  console.log(err);
-});
-  }
+    formPayload.append("image", formData.image_url);
 
+  axios.post('http://127.0.0.1:8000/api/post-create-list/', formPayload, {
+  headers: {
+    'Content-Type': 'multipart/form-data'
+  }
+  }).then(res => {
+    console.log(res);
+  }).catch(err => {
+    console.log(err);
+  });
+}
 
   return (
     <div className='min-w-[280px] max-w-[444px] min-h-screen flex items-center justify-center w-full my-4 mx-auto'>
       <div className='container'>
         <div className='location-accessbility'>
-          <form className='py-4 px-2' onSubmit={submitData}>
+          <form className='py-4 px-2' encType="multipart/form-data" onSubmit={submitData}>
             <div className='loaction-name'>
               <label htmlFor='location'>
                 Location
@@ -212,12 +205,13 @@ const Post = () => {
             </label>
             <input
               required
-              onChange={imageChange}
+              onChange={handleImageChange}
               type='file'
               name='image'
               id='upload-img'
               className='hidden'
-              multiple
+              accept="image/jpeg,image/png,image/gif"
+              // multiple
             />
 
             <div className='discription-field w-full'>

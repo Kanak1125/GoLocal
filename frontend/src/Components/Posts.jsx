@@ -6,6 +6,7 @@ const Post = (props) => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  console.log(data);
   useEffect(() => {
     setLoading(true);
 
@@ -35,7 +36,7 @@ const Post = (props) => {
   })
 
   return (
-    <div className="mx-auto max-w-[676px]">
+    <div className="mx-auto w-full ">
       {postItems}
     </div>
   );

@@ -1,10 +1,13 @@
 import { Navigation, Pagination, Autoplay} from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
+import { EffectCube } from 'swiper/modules';
 
 import 'swiper/css';
+// import 'swiper/swiper.min.css'
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/autoplay';
+import 'swiper/css/effect-cube';
 
 const imgArr = [
     "https://images.unsplash.com/photo-1557659685-c32f6f233dda?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=435&q=80",
@@ -15,8 +18,9 @@ const imgArr = [
 
 const swiperSlides = imgArr.map((img, index) => {
     return (
-      <SwiperSlide key={index} className='h-[400px] overflow-hidden'>
-        <img src={img} alt="" className={`h-[400px] w-full object-contain object-center bg-black`}/>
+      <SwiperSlide key={index} className='overflow-hidden h-[400px]'>
+        <img src={img} alt="" className={`h-[240px] sm:h-[400px] w-full object-contain object-center select-none`}/>
+        {/* <div className='w-full h-full '></div> */}
       </SwiperSlide>
     )
   })
@@ -25,7 +29,7 @@ const MySwiper = () => {
   return (
     <Swiper
         // install Swiper modules
-        modules={[Navigation, Pagination, Autoplay]}
+        modules={[Navigation, Pagination, Autoplay, EffectCube]}
         spaceBetween={0}
         slidesPerView={1}
         navigation
@@ -35,6 +39,7 @@ const MySwiper = () => {
           disableOnInteraction: false
         }}
         pagination={{ clickable: true }}
+        effect="cube"
       >
         {swiperSlides}
       </Swiper>

@@ -25,6 +25,8 @@ class Post(models.Model):
     
     difficulty = models.CharField(max_length=100, blank=True,null=True)
 
+    image = models.ImageField(upload_to='post_images/', blank=True, null=True)
+
     location = models.CharField(max_length=100, blank=True, null=True)
     upload_date = models.DateTimeField(auto_now_add=True, blank=True, null=True)
 
@@ -34,8 +36,8 @@ class Post(models.Model):
     # def total_likes(self):
     #     return self.likes.count()
     
-    def __str__(self):
-        return  f'User:{self.user} - {self.description[:10]}'
+    # def __str__(self):
+    #     return  f'User:{self.user} - {self.description[:10]}'
 
 class PostImage(models.Model):
     post = models.ForeignKey(Post, on_delete=models.CASCADE, null=True, blank=True, related_name="images")

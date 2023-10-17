@@ -1,7 +1,7 @@
 from django.http import HttpResponse
 from django.shortcuts import render
 from rest_framework import status,viewsets,filters
-
+import os
 from rest_framework.decorators import api_view, parser_classes, permission_classes
 from rest_framework.parsers import MultiPartParser, FormParser
 from rest_framework.response import Response  
@@ -72,10 +72,58 @@ def usercreate(request):
 
 from rest_framework import generics
 
-class postcreate(generics.ListCreateAPIView):
+
+class postcreate(viewsets.ModelViewSet):
     queryset = Post.objects.all()
     serializer_class = PostSerializer
+    parser_classes = (MultiPartParser,FormParser)
 
+    def perform_create(self, serializer):
+        serializer.save()
+        
+# class postcreate(generics.ListCreateAPIView):
+#     queryset = Post.objects.all()
+#     serializer_class = PostSerializer
+
+    
+#     def create(self, request, *args, **kwargs):
+#         serializer = self.get_serializer(data=request.data)
+
+#         if serializer.is_valid():
+#             # Process and save the uploaded images locally
+#             uploaded_images = request.FILES.getlist('image')
+#             image_urls = []
+
+#             # Create the 'post_images' directory if it doesn't exist
+#             if not os.path.exists('media/post_images'):
+#                 os.makedirs('media/post_images')
+
+#             for uploaded_image in uploaded_images:
+#                 # Customize the path where the image will be saved
+#                 image_path = f'media/post_images/{uploaded_image.name}'
+                
+#                 with open(image_path, 'wb+') as destination:
+#                     for chunk in uploaded_image.chunks():
+#                         destination.write(chunk)
+
+#                 # Construct the image URL including the '/media/' prefix
+#                 image_url = request.build_absolute_uri(image_path)
+#                 image_urls.append(image_url)
+
+#             # Set the image field of the post to the first uploaded image URL
+#             if image_urls:
+#                 serializer.validated_data['image'] = image_urls[0]
+
+#             # Create the post object
+#             serializer.save()
+
+#             # Add the image URLs to the response data
+#             response_data = serializer.data
+#             response_data['image_urls'] = image_urls
+
+#             return Response(response_data, status=status.HTTP_201_CREATED)
+        
+#         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class CommentListCreateView(generics.ListCreateAPIView):
     serializer_class = CommentSerializer

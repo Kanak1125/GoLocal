@@ -53,9 +53,11 @@ class PostSerializer(serializers.ModelSerializer):
     #     write_only=True
     # )
     class Meta:
+        image = serializers.ImageField(required=False)
+
         model = Post
         # fields = ['id', 'user', 'name', 'transportation', 'restaurant', 'lodging', 'trek', 'difficulty', 'description', 'location','upload_date','images', 'uploaded_images']
-        fields = ['id', 'user', 'name', 'transportation', 'restaurant', 'lodging', 'trek', 'difficulty', 'description', 'location','upload_date']
+        fields = ['id', 'user', 'name', 'transportation','image', 'restaurant', 'lodging', 'trek', 'difficulty', 'description', 'location','upload_date']
 
     # def create(self, validated_data):
     #     uploaded_images = validated_data.pop('uploaded_images')
