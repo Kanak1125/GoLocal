@@ -4,6 +4,9 @@
 
 @layer utilities {
   /* for buttons */
+  .swiper {
+    width: 200px;
+  }
   .accent-color {
     background-color: hsl(188, 62%, 43%);
     color: white;

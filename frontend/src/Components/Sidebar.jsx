@@ -3,7 +3,7 @@ import Posts from "./Posts";
 
 const Sidebar = () => {
   return (
-    <div className='sidebar bg-gray-100 py-4 px-3 rounded-lg mr-6 max-content-height'>
+    <div className='hidden sidebar bg-gray-100 py-4 px-3 rounded-lg mr-6 max-content-height md:block '>
       <div className='explore-container flex items-center bg-white p-4 rounded-md'>
         <div className='circle w-[40px] min-w-[40px] h-[40px] rounded-full accent-color overflow-hidden'>
           <img
