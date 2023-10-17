@@ -9,7 +9,7 @@ import {
 } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 delete L.Icon.Default.prototype._getIconUrl;
 
@@ -51,9 +51,9 @@ function LocationMarker() {
   const map = useMap(); // use the useMap hook to access the map instance
   useMapEvents({
     // use the useMapEvents hook to handle map events
-    mouseover() {
-      map.locate();
-    },
+    // mouseover() {
+    //   map.locate();
+    // },
     click(e) {
       setPosition(e.latlng);
     },
@@ -63,6 +63,10 @@ function LocationMarker() {
       map.flyTo(e.latlng, map.getZoom()); // center the map on the current location
     },
   });
+
+  useEffect(() => {
+    map.locate();
+  }, []);
 
   return position === null ? null : (
     <Marker position={position}>
