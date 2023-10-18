@@ -27,25 +27,25 @@ class UserSerializer(serializers.ModelSerializer):
         fields = ['id', 'username', 'password', 'email', 'first_name', 'last_name', 'extend_info']
 
 
-class PostImageSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = PostImage
-        fields = ['id', 'post','image']
-
 class CommentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Comment
         fields = ['id', 'user', 'post', 'comment']
 
 
+class PostImageSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = PostImage
+        fields = ['id', 'post','image']
+
 
 
 class PostSerializer(serializers.ModelSerializer):
-    # images = PostImageSerializer(many=True, read_only=True)
-    # uploaded_images = serializers.ListField(
-    #     child = serializers.ImageField(max_length=1000000, allow_empty_file=False, use_url=False),
-    #     write_only=True 
-    # )
+    images = PostImageSerializer(many=True, read_only=True)
+    uploaded_images = serializers.ListField(
+        child = serializers.ImageField(max_length=1000000, allow_empty_file=False, use_url=False),
+        write_only=True 
+    )
     # total_likes = serializers.SerializerMethodField()
     # comments = CommentSerializer(many=True, read_only=True)
     # uploaded_images = serializers.ListField(
@@ -53,11 +53,19 @@ class PostSerializer(serializers.ModelSerializer):
     #     write_only=True
     # )
     class Meta:
-        image = serializers.ImageField(required=False)
+        # image = serializers.ImageField(required=False)
 
         model = Post
         # fields = ['id', 'user', 'name', 'transportation', 'restaurant', 'lodging', 'trek', 'difficulty', 'description', 'location','upload_date','images', 'uploaded_images']
-        fields = ['id', 'user', 'name', 'transportation','image', 'restaurant', 'lodging', 'trek', 'difficulty', 'description', 'location','upload_date']
+        fields = ['id', 'user', 'name', 'transportation', 'images', 'uploaded_images', 'restaurant', 'lodging', 'trek', 'difficulty', 'description', 'location','upload_date']
+
+    def create(self, validated_data):
+        uploaded_images = validated_data.pop("uploaded_images")
+        post = Post.objects.create(**validated_data)
+        for image in uploaded_images:
+            PostImage.objects.create(post=post, image=image)
+
+        return post
 
     # def create(self, validated_data):
     #     uploaded_images = validated_data.pop('uploaded_images')
