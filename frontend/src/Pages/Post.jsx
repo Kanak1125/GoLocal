@@ -12,7 +12,7 @@ const Post = () => {
     restaurant: "",
     lodging: "",
     description: "",
-    image_url: [],
+    image_file: [],
   });
 
   // const [errors, setErrors] = useState("");
@@ -54,7 +54,7 @@ const Post = () => {
       setFormData((prevFormData) => {
         return {
           ...prevFormData,
-          image_url: event.target.files[0],
+          image_file: [...event.target.files],
         }
       })
     }
@@ -62,12 +62,20 @@ const Post = () => {
   };
   // console.log(images);
 
+  function resetFormData() {
+    setFormData({
+      location: "",
+      transport: "",
+      restaurant: "",
+      lodging: "",
+      description: "",
+      image_file: [],
+    })
+  }
+
   const submitData = async (event) => {
     event.preventDefault();
-    // const response = await API.createMyModelEntry(formData);
-    // if (response.status === 400) {
-    //   setErrors("Invalid data");
-    // }
+    
     const formPayload = new FormData();
     formPayload.append("location", formData.location);
     formPayload.append("restaurant", formData.restaurant);
@@ -75,7 +83,9 @@ const Post = () => {
     formPayload.append("difficuty", diffcult);
     formPayload.append("description", formData.description);
     formPayload.append("transport", formData.transport);
-    formPayload.append("image", formData.image_url);
+    for (const image of formData.image_file) {
+      formPayload.append("uploaded_images", image);
+    }
 
   axios.post('http://127.0.0.1:8000/api/post-create-list/', formPayload, {
   headers: {
@@ -86,6 +96,8 @@ const Post = () => {
   }).catch(err => {
     console.log(err);
   });
+
+  resetFormData();
 }
 
   return (
@@ -211,7 +223,7 @@ const Post = () => {
               id='upload-img'
               className='hidden'
               accept="image/jpeg,image/png,image/gif"
-              // multiple
+              multiple
             />
 
             <div className='discription-field w-full'>
