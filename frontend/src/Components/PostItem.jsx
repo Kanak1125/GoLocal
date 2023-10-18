@@ -35,7 +35,7 @@ const PostItem = (props) => {
       <div className='post-info '>
         {/* <div className='location-img-detail '> */}
           <div className='post-image my-5 bg-black rounded-md overflow-hidden'>
-            <MySwiper />
+            <MySwiper images={itemData.images}/>
           </div>
         {/* </div> */}
         <div className='location-discription-map '>
