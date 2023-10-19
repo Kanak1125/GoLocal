@@ -4,7 +4,7 @@ const ToggleSlider = (props) => {
   // const { label } = props;
 
   return (
-    <div className='mt-3 w-full flex items-center justify-between'>
+    <div className='mt-3 w-full flex flex-col justify-between md:flex-row md:items-center'>
       <label className='switch'>
         <input
           type='checkbox'

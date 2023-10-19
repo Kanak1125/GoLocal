@@ -104,26 +104,30 @@ const Post = () => {
 }
 
   return (
-    <div className='min-w-[280px] max-w-[444px] min-h-screen flex items-center justify-center w-full my-4 mx-auto'>
+    <div className='min-w-[280px] max-w-[444px] min-h-screen flex items-center justify-center w-full mx-auto md:my-4'>
       <div className='container'>
-        <div className='location-accessbility'>
-          <form className='py-4 px-2' encType="multipart/form-data" onSubmit={submitData}>
-            <div className='loaction-name'>
-              <label htmlFor='location'>
-                Location
-                <input
-                  onChange={handleChange}
-                  type='text'
-                  placeholder='Add Location'
-                  value={formData.location}
-                  name='location'
-                  required
-                />
-              </label>
-              <div className='map mt-3'>
+        <div className='flex flex-col justify-center items-center mx-0 w-full max-w-[555px] h-full py-3 px-5 rounded-md __box__shadow'>
+          <form className='flex flex-col justify-center items-center w-full h-full py-4 px-2 gap-2' encType="multipart/form-data" onSubmit={submitData}>
+            <div className='loaction-name w-full h-full mb-2'>
+              <div className="flex flex-col md:flex-row md:items-center">
+                <label htmlFor='location' className = "mb-2 me-4 text-xl font-medium __color__333">
+                  Location:
+                </label>
+                  <input
+                    onChange={handleChange}
+                    type='text'
+                    placeholder='Add Location'
+                    value={formData.location}
+                    name='location'
+                    id='location'
+                    className="w-full px-3 py-2 border-2 border-gray-300 rounded-lg focus:ring focus:ring-teal-400 focus:border-teal-500 outline-none"
+                    required
+                  />
+              </div>
+              <div className='map mt-3 '>
                 <button
                   onClick={(e) => handleClick(e)}
-                  className='accent-color text-white font-bold py-2 px-4 rounded-full transition-all duration-300'
+                  className='accent-color text-white font-bold py-2 px-4 rounded-full transition-all duration-300 '
                 >
                   Add location From Map
                 </button>
@@ -134,87 +138,92 @@ const Post = () => {
                 )}
               </div>
             </div>
-            <div className='select-access'>
-                <div className="transport-access flex items-center mb-4">
-                  <p className="mr-2">Transport</p>
-                  <input
-                    type="radio"
-                    id="two-wheeler"
-                    name="transport"
-                    value="Two-Wheeler"
-                    checked={formData.transport === "Two-Wheeler"}
-                    onChange={handleChange}
-                    className="mr-1"
-                  />
-                  <label htmlFor="two-wheeler" className="mr-4 cursor-pointer">Two-Wheeler</label>
+            <div className='select-access self-start'>
+                <div className="transport-access mb-4 flex flex-col justify-between">
+                  <h3 className="mr-2 text-xl font-semibold">Transport:</h3>
+                  <div className="">
+                    <input
+                      type="radio"
+                      id="two-wheeler"
+                      name="transport"
+                      value="Two-Wheeler"
+                      checked={formData.transport === "Two-Wheeler"}
+                      onChange={handleChange}
+                      className="mr-1"
+                    />
+                    <label htmlFor="two-wheeler" className="cursor-pointer me-10">Two-Wheeler</label>
 
-                  <input
-                    type="radio"
-                    id="any"
-                    name="transport"
-                    value="Any"
-                    checked={formData.transport === "Any"}
-                    onChange={handleChange}
-                    className="mr-1"
-                  />
-                  <label htmlFor="any" className="cursor-pointer">Any</label>
+                    <input
+                      type="radio"
+                      id="any"
+                      name="transport"
+                      value="Any"
+                      checked={formData.transport === "Any"}
+                      onChange={handleChange}
+                      className="mr-1"
+                    />
+                    <label htmlFor="any" className="cursor-pointer">Any</label>
+                  </div>
+                  </div>
+
+                <div className="restaurant-access flex flex-col justify-between mb-4 ">
+                  <h3 className="mr-2 text-xl font-semibold">Restaurant:</h3>
+                  <div className="">  
+                    <input
+                      type="radio"
+                      id="restaurant-available"
+                      name="restaurant"
+                      value="RestaurantAvailable"
+                      checked={formData.restaurant === "RestaurantAvailable"}
+                      onChange={handleChange}
+                      className="mr-1"
+                    />
+                    <label htmlFor="restaurant-available" className="mr-4 cursor-pointer">Restaurant Available</label>
+
+                    <input
+                      type="radio"
+                      id="restaurant-not-available"
+                      name="restaurant"
+                      value="RestaurantNotAvailable"
+                      checked={formData.restaurant === "RestaurantNotAvailable"}
+                      onChange={handleChange}
+                      className="mr-1"
+                    />
+                    <label htmlFor="restaurant-not-available" className="cursor-pointer">Restaurant Not Available</label>
+                  </div>
                 </div>
 
-                <div className="restaurant-access flex items-center mb-4">
-                  <p className="mr-2">Restaurant</p>
-                  <input
-                    type="radio"
-                    id="restaurant-available"
-                    name="restaurant"
-                    value="RestaurantAvailable"
-                    checked={formData.restaurant === "RestaurantAvailable"}
-                    onChange={handleChange}
-                    className="mr-1"
-                  />
-                  <label htmlFor="restaurant-available" className="mr-4 cursor-pointer">Restaurant Available</label>
+                <div className="stay-access flex flex-col">
+                <h3 className="mr-2 text-xl font-semibold">Hotels:</h3>
+                <div>
+                    <input
+                      type="radio"
+                      id="hotels-available"
+                      name="lodging"
+                      value="HotelsAvailable"
+                      checked={formData.lodging === "HotelsAvailable"}
+                      onChange={handleChange}
+                      className="mr-1"
+                    />
+                    <label htmlFor="hotels-available" className="mr-4 cursor-pointer">Hotels Available</label>
 
-                  <input
-                    type="radio"
-                    id="restaurant-not-available"
-                    name="restaurant"
-                    value="RestaurantNotAvailable"
-                    checked={formData.restaurant === "RestaurantNotAvailable"}
-                    onChange={handleChange}
-                    className="mr-1"
-                  />
-                  <label htmlFor="restaurant-not-available" className="cursor-pointer">Restaurant Not Available</label>
-                </div>
-
-                <div className="stay-access flex items-center">
-                  <p className="mr-2">Hotels</p>
-                  <input
-                    type="radio"
-                    id="hotels-available"
-                    name="lodging"
-                    value="HotelsAvailable"
-                    checked={formData.lodging === "HotelsAvailable"}
-                    onChange={handleChange}
-                    className="mr-1"
-                  />
-                  <label htmlFor="hotels-available" className="mr-4 cursor-pointer">Hotels Available</label>
-
-                  <input
-                    type="radio"
-                    id="hotels-not-available"
-                    name="lodging"
-                    value="HotelsNotAvailable"
-                    checked={formData.lodging === "HotelsNotAvailable"}
-                    onChange={handleChange}
-                    className="mr-1"
-                  />
-                  <label htmlFor="hotels-not-available" className="cursor-pointer">Hotels Not Available</label>
+                    <input
+                      type="radio"
+                      id="hotels-not-available"
+                      name="lodging"
+                      value="HotelsNotAvailable"
+                      checked={formData.lodging === "HotelsNotAvailable"}
+                      onChange={handleChange}
+                      className="mr-1"
+                    />
+                    <label htmlFor="hotels-not-available" className="cursor-pointer">Hotels Not Available</label>
+                  </div>
                 </div>
               </div>
 
-
             <label
               htmlFor='upload-img'
-              className='accent-color text-white font-bold py-2 px-4 rounded-full transition-all duration-300 mb-4 cursor-pointer align-start'
+              className='accent-color text-white font-bold py-2 px-4 rounded-full transition-all duration-300 mb-4 cursor-pointer self-start mt-4 '
             >
               Upload image
             </label>
@@ -231,7 +240,7 @@ const Post = () => {
 
             <div className='discription-field w-full'>
               <textarea
-                className='w-full px-3 py-2 border rounded-lg focus:ring focus:ring-blue-300 focus:border-blue-500'
+                className='w-full px-3 py-2 border-2 border-gray-300 rounded-lg focus:ring focus:ring-teal-400 focus:border-teal-500 outline-none'
                 onChange={handleChange}
                 value={formData.description}
                 placeholder='Description'
@@ -239,7 +248,7 @@ const Post = () => {
               />
             </div>
             <div className='trek-toggle flex flex-col w-full font-bold mt-2'>
-              <label>Trek / Hike?</label>
+              <label className="text-xl font-semibold">Trek / Hike?</label>
               <ToggleSlider
                 check={isChecked}
                 difficulty={diffcult}
@@ -250,7 +259,7 @@ const Post = () => {
             <input
               type='submit'
               value='Upload'
-              className='accent-color text-white font-bold py-2 px-4 rounded-full transition-all duration-300 mt-5 cursor-pointer'
+              className='w-full accent-color text-white font-bold py-2 px-4 rounded-full transition-all duration-300 mt-5 cursor-pointer self-start'
             />
           </form>
         </div>
