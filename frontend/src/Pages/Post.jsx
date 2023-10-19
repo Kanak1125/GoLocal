@@ -3,6 +3,7 @@ import ToggleSlider from "../Components/ToggleSlider";
 import WebMap from "../Components/WebMap";
 import { useAuthContext } from "../context/AuthContext";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const Post = () => {
   const { currentUser } = useAuthContext();
@@ -16,6 +17,7 @@ const Post = () => {
   });
 
   // const [errors, setErrors] = useState("");
+  const navigate = useNavigate();
 
   console.log(formData);
   const [isChecked, setIsChecked] = React.useState(false);
@@ -93,6 +95,7 @@ const Post = () => {
   }
   }).then(res => {
     console.log(res);
+    navigate('/');
   }).catch(err => {
     console.log(err);
   });
