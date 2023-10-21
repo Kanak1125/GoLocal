@@ -46,7 +46,10 @@
 .container {
   z-index: 10;
 }
-.location-accessbility {
+.__box__shadow {
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+/* .location-accessbility {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -59,30 +62,34 @@
   background-color: #fff;
   border-radius: 10px;
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
-}
-.location-accessbility form {
+} */
+/* .location-accessbility form {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   width: 100%;
   height: 100%;
-}
+} */
 
-.location-accessbility form .loaction-name {
+/* .location-accessbility form .loaction-name {
   width: 100%;
   height: 100%;
   margin-bottom: 10px;
-}
-.location-accessbility form .loaction-name label {
+} */
+/* .location-accessbility form .loaction-name label {
   display: block;
   width: 100%;
   height: 100%;
   font-size: 1.2rem;
   font-weight: 500;
   color: #333;
+} */
+
+.__color__333 {
+  color: #333;
 }
-.location-accessbility form .loaction-name label input {
+/* .location-accessbility form .loaction-name label input {
   display: block;
   width: 100%;
   height: 100%;
@@ -93,24 +100,24 @@
   font-size: 1rem;
   font-weight: 500;
   color: #333;
-}
-.location-accessbility form .select-access {
+} */
+/* .location-accessbility form .select-access {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   width: 100%;
   height: 100%;
-}
-.location-accessbility form .select-access label {
+} */
+/* .location-accessbility form .select-access label {
   display: block;
   width: 100%;
   height: 100%;
   font-size: 1.2rem;
   font-weight: 500;
   color: #333;
-}
-.location-accessbility form .select-access select {
+} */
+/* .location-accessbility form .select-access select {
   display: block;
   width: 100%;
   height: 100%;
@@ -121,8 +128,8 @@
   font-size: 1rem;
   font-weight: 500;
   color: #333;
-}
-.location-accessbility form .select-access select option {
+} */
+/* .location-accessbility form .select-access select option {
   display: block;
   width: 100%;
   height: 100%;
@@ -133,8 +140,8 @@
   font-size: 1rem;
   font-weight: 500;
   color: #333;
-}
-.location-accessbility form .select-access select option:hover {
+} */
+/* .location-accessbility form .select-access select option:hover {
   background-color: #ccc;
 }
 .location-accessbility form .select-access select option:active {
@@ -154,7 +161,7 @@
 }
 .location-accessbility form .select-access select option:checked {
   background-color: #ccc;
-}
+} */
 .switch {
   position: relative;
   display: inline-block;
