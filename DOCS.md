@@ -23,6 +23,8 @@ npm install
 - npm i swiper
 - npm i jwt-decode
 - npm i react-leaflet
+<!-- - npm install --save tinypng -->
+- npm i --save react-lazy-load-image-component
 
 ### python commands
 

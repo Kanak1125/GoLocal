@@ -4,6 +4,7 @@ import {
   useMap,
   Marker,
   Popup,
+  useMapEvent,
   useMapEvents,
   useLocationFound,
 } from "react-leaflet";
@@ -60,13 +61,18 @@ function LocationMarker() {
     locationfound(e) {
       // handle the location found event
       setPosition(e.latlng); // update the marker position state
-      map.flyTo(e.latlng, map.getZoom()); // center the map on the current location
+      // map.flyTo(e.latlng, map.getZoom()); // center the map on the current location
+      map.setView(e.latlng, map.getZoom());
     },
   });
 
   useEffect(() => {
     map.locate();
   }, []);
+
+  useEffect(() => {
+    map.setView(position || initPosition, map.getZoom());
+  }, [position]);
 
   return position === null ? null : (
     <Marker position={position}>
