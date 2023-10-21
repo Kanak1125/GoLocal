@@ -57,7 +57,7 @@ class PostSerializer(serializers.ModelSerializer):
 
         model = Post
         # fields = ['id', 'user', 'name', 'transportation', 'restaurant', 'lodging', 'trek', 'difficulty', 'description', 'location','upload_date','images', 'uploaded_images']
-        fields = ['id', 'user', 'name', 'transportation', 'images', 'uploaded_images', 'restaurant', 'lodging', 'trek', 'difficulty', 'description', 'location','upload_date']
+        fields = ['id', 'user', 'location', 'transportation', 'images', 'uploaded_images', 'restaurant', 'lodging', 'trek', 'difficulty', 'description', 'coordinates','upload_date']
 
     def create(self, validated_data):
         uploaded_images = validated_data.pop("uploaded_images")
