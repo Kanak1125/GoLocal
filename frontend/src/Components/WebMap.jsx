@@ -37,7 +37,7 @@ L.Icon.Default.mergeOptions({
 
 const initPosition = [51.505, -0.15];
 
-function LocationMarker() {
+function LocationMarker({ setFormData }) {
   const [position, setPosition] = useState(null);
   // const map = useMapEvents({
   //     click() {
@@ -57,6 +57,14 @@ function LocationMarker() {
     // },
     click(e) {
       setPosition(e.latlng);
+
+      if (setFormData) {
+        setFormData((prev) => ({
+          ...prev,
+          lat: e.latlng.lat,
+          lng: e.latlng.lng,
+        }));
+      }
     },
     locationfound(e) {
       // handle the location found event
@@ -94,7 +102,7 @@ function LocationMarker() {
 //   return <Marker position={marker}></Marker>;
 // };
 
-const WebMap = ({height}) => {
+const WebMap = ({ height, setFormData}) => {
   return (
     <MapContainer
       center={initPosition}
@@ -107,7 +115,7 @@ const WebMap = ({height}) => {
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
       />
-      <LocationMarker />
+      <LocationMarker setFormData={setFormData}/>
     </MapContainer>
   );
 };

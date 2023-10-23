@@ -9,6 +9,8 @@ const Post = () => {
   const { currentUser } = useAuthContext();
   const [formData, setFormData] = useState({
     location: "",
+    lat: null,
+    lng: null,
     transport: "",
     restaurant: "",
     lodging: "",
@@ -67,6 +69,8 @@ const Post = () => {
   function resetFormData() {
     setFormData({
       location: "",
+      lat: null,
+      lng: null,
       transport: "",
       restaurant: "",
       lodging: "",
@@ -80,6 +84,8 @@ const Post = () => {
     
     const formPayload = new FormData();
     formPayload.append("location", formData.location);
+    formPayload.append("lat", formData.lat);
+    formPayload.append("lng", formData.lng);
     formPayload.append("restaurant", formData.restaurant);
     formPayload.append("lodging", formData.lodging);
     formPayload.append("difficuty", diffcult);
@@ -133,7 +139,10 @@ const Post = () => {
                 </button>
                 {buttonClicked && (
                   <div className='my-4 rounded-md w-full'>
-                    <WebMap height={'300px'}/>
+                    <WebMap
+                      height={'300px'}
+                      setFormData={setFormData}
+                    />
                   </div>
                 )}
               </div>
