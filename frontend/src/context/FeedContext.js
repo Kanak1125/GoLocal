@@ -9,24 +9,16 @@ export function useFeedContext() {
 }
 
 export function FeedProvider({ children }) {
-    const [data, setData] = useState([]);
-
-    const [ result, loading, error ] = useApi('http://127.0.0.1:8000/api/post-create-list/');
+    const [ result, fetchStatus ] = useApi('http://127.0.0.1:8000/api/post-create-list/');
     
-    useEffect(() => {
-        if (error) {
-            setData([]);
-        } else {
-            setData([...result]);
-        }
-    }, [result]);
     console.log(result);
 
     return (
         <FeedContext.Provider value={{
-            feedData: data,
+            feedData: result,
+            fetchStatus: fetchStatus,
         }}>
-            {!loading && children}
+            {fetchStatus !== "loading" && children}
         </FeedContext.Provider>
     )
 }

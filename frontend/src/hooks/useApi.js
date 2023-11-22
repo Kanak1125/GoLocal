@@ -3,39 +3,39 @@ import axios from "axios";
 
 export function useApi(url) {
     const [result, setResult] = useState([]);
-    const [loading, setLoading] = useState(false);
-    const [error, setError] = useState(false);
-    const TIMEOUT = 1000;
+    const [fetchStatus, setFetchStatus] = useState("idle");
+    const TIMEOUT = 5000;
 
     // Link to docs:https://axios-http.com/docs/cancellation...
     useEffect(() => {
-        const controller = new AbortController();   // instance of AbortController...
-        setLoading(true);
+        // const controller = new AbortController();   // instance of AbortController...
+        const timer = setTimeout(() => {
+            if (fetchStatus !== "success" || fetchStatus !== "error") {
+                setFetchStatus("delayed");
+            }
+        }, TIMEOUT);    // after 5 secs the request will be aborted...
+
+        console.log(fetchStatus);
 
         const getDataFromApi = async () => {
+            setFetchStatus("loading");
             try {
-                const response = await axios.get(url, {
-                    signal: controller.signal,
-                })
-    
+                const response = await axios.get(url)
                 const data = await response.data;
                 setResult([...data]);
-                setLoading(false);
+                setFetchStatus("success");
+                clearTimeout(timer);
             } catch(err) {
-                setLoading(false);
-                setError(true);
+                setFetchStatus("error");
                 console.log(`ERROR:${err}`);
+                clearTimeout(timer);
             }
         }
 
         getDataFromApi();
-        const timer = setTimeout(() => {
-            controller.abort();
-        }, TIMEOUT);    // after 1 second the request will be aborted...
 
         return () => clearTimeout(timer);
-        // controller.abort();
     }, [url]);
 
-    return [result, loading, error];
+    return [result, fetchStatus];
 }

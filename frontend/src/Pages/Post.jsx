@@ -84,8 +84,9 @@ const Post = () => {
     
     const formPayload = new FormData();
     formPayload.append("location", formData.location);
-    formPayload.append("lat", formData.lat);
-    formPayload.append("lng", formData.lng);
+    // formPayload.append("lat", formData.lat);
+    // formPayload.append("lng", formData.lng);
+    formPayload.append("coordinates", JSON.stringify([formData.lng, formData.lat]));
     formPayload.append("restaurant", formData.restaurant);
     formPayload.append("lodging", formData.lodging);
     formPayload.append("difficuty", diffcult);
@@ -112,7 +113,7 @@ const Post = () => {
   return (
     <div className='min-w-[280px] max-w-[444px] min-h-screen flex items-center justify-center w-full mx-auto md:my-4'>
       <div className='container'>
-        <div className='flex flex-col justify-center items-center mx-0 w-full max-w-[555px] h-full py-3 px-5 rounded-md __box__shadow'>
+        <div className='flex flex-col justify-center items-center mx-0 w-full max-w-[555px] h-full py-3 px-5 rounded-md __box__shadow my-4'>
           <form className='flex flex-col justify-center items-center w-full h-full py-4 px-2 gap-2' encType="multipart/form-data" onSubmit={submitData}>
             <div className='loaction-name w-full h-full mb-2'>
               <div className="flex flex-col md:flex-row md:items-center">
@@ -187,7 +188,7 @@ const Post = () => {
                       onChange={handleChange}
                       className="mr-1"
                     />
-                    <label htmlFor="restaurant-available" className="mr-4 cursor-pointer">Restaurant Available</label>
+                    <label htmlFor="restaurant-available" className="mr-4 cursor-pointer">Available</label>
 
                     <input
                       type="radio"
@@ -198,7 +199,7 @@ const Post = () => {
                       onChange={handleChange}
                       className="mr-1"
                     />
-                    <label htmlFor="restaurant-not-available" className="cursor-pointer">Restaurant Not Available</label>
+                    <label htmlFor="restaurant-not-available" className="cursor-pointer">Not Available</label>
                   </div>
                 </div>
 
@@ -214,7 +215,7 @@ const Post = () => {
                       onChange={handleChange}
                       className="mr-1"
                     />
-                    <label htmlFor="hotels-available" className="mr-4 cursor-pointer">Hotels Available</label>
+                    <label htmlFor="hotels-available" className="mr-4 cursor-pointer">Available</label>
 
                     <input
                       type="radio"
@@ -225,7 +226,7 @@ const Post = () => {
                       onChange={handleChange}
                       className="mr-1"
                     />
-                    <label htmlFor="hotels-not-available" className="cursor-pointer">Hotels Not Available</label>
+                    <label htmlFor="hotels-not-available" className="cursor-pointer">Not Available</label>
                   </div>
                 </div>
               </div>
