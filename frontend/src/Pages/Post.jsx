@@ -22,7 +22,7 @@ const Post = () => {
   const navigate = useNavigate();
 
   console.log(formData);
-  const [isChecked, setIsChecked] = React.useState(false);
+  const [isChecked, setIsChecked] = React.useState(false); // state for trek/hike checkbox toggle...
   const [diffcult, setDiffcult] = React.useState("");
   const handleToggle = () => {
     setIsChecked(!isChecked);
@@ -48,7 +48,9 @@ const Post = () => {
     setFormData((prevFormData) => {
       return {
         ...prevFormData,
-        [name]: type === "checkbox" ? checked : value,
+        [name]: type === "checkbox" ? 
+          checked
+        : value,
       };
     });
   }
@@ -72,8 +74,8 @@ const Post = () => {
       lat: null,
       lng: null,
       transport: "",
-      restaurant: "",
-      lodging: "",
+      restaurant: false,
+      lodging: false,
       description: "",
       image_file: [],
     })
@@ -87,8 +89,8 @@ const Post = () => {
     // formPayload.append("lat", formData.lat);
     // formPayload.append("lng", formData.lng);
     formPayload.append("coordinates", JSON.stringify([formData.lng, formData.lat]));
-    formPayload.append("restaurant", formData.restaurant);
-    formPayload.append("lodging", formData.lodging);
+    formPayload.append("restaurant", formData.restaurant === "RestaurantAvailable" ? true : false);
+    formPayload.append("lodging", formData.lodging === "HotelsAvailable" ? true : false);
     formPayload.append("difficuty", diffcult);
     formPayload.append("description", formData.description);
     formPayload.append("transport", formData.transport);

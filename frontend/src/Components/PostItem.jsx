@@ -22,6 +22,7 @@ const PostItem = (props) => {
       document.body.classList.remove('overflow-hidden');
     }
 
+    console.log(itemData);
     if (open) document.body.classList.add('overflow-hidden');
     const { currentUser } = useAuthContext();
     const [like, setLike] = useState(false);
@@ -99,8 +100,9 @@ const PostItem = (props) => {
             </div>
             <div className='post-details list-item list-inside list-none text-center font-medium'>
               <ul className="flex break-keep flex-wrap gap-4">
-                <li className="py-2 px-4 secondary-color rounded-full ">Lodging</li>
-                <li className="py-2 px-4 secondary-color rounded-full ">Resturants</li>
+                {itemData.lodging && <li className="py-2 px-4 secondary-color rounded-full ">Lodging</li>}
+                {itemData.restaurant && <li className="py-2 px-4 secondary-color rounded-full ">Resturants</li>}
+                {itemData.transportation && <li className="py-2 px-4 secondary-color rounded-full capitalize">{ itemData.transportation }</li>}
               </ul>
             </div>
             <section className="reacts-section flex gap-5 my-5 mx-2">
