@@ -11,6 +11,7 @@ import {
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
 import { useEffect, useState } from "react";
+import { useFeedContext } from "../context/FeedContext";
 
 delete L.Icon.Default.prototype._getIconUrl;
 
@@ -35,10 +36,13 @@ L.Icon.Default.mergeOptions({
 
 // myMap.on('locationfound', onLocationFound);
 
-const initPosition = [51.505, -0.15];
+let initPosition = [51.505, -0.15];
 
-function LocationMarker({ setFormData }) {
-  const [position, setPosition] = useState(null);
+function LocationMarker({ setFormData, currentData }) {
+  const currentCoordinates = JSON.parse(currentData?.coordinates);
+  console.log(currentCoordinates);
+
+  const [position, setPosition] = useState([currentCoordinates[0], currentCoordinates[1]] || null);
   // const map = useMapEvents({
   //     click() {
   //         map.locate();
@@ -48,8 +52,13 @@ function LocationMarker({ setFormData }) {
   //         map.flyTo(e.latlng, map.getZoom())
   //     },
   // })
+
   console.log(position);
   const map = useMap(); // use the useMap hook to access the map instance
+  
+  // console.log(JSON.parse(currentData.coordinates));
+  // initPosition = [currentCoordinates?.lat, currentCoordinates?.lng];
+
   useMapEvents({
     // use the useMapEvents hook to handle map events
     // mouseover() {
@@ -102,7 +111,7 @@ function LocationMarker({ setFormData }) {
 //   return <Marker position={marker}></Marker>;
 // };
 
-const WebMap = ({ height, setFormData}) => {
+const WebMap = ({ height, currentData, setFormData}) => {
   return (
     <MapContainer
       center={initPosition}
@@ -115,7 +124,7 @@ const WebMap = ({ height, setFormData}) => {
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
       />
-      <LocationMarker setFormData={setFormData}/>
+      <LocationMarker setFormData={setFormData} currentData={ currentData }/>
     </MapContainer>
   );
 };

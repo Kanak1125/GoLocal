@@ -4,6 +4,7 @@ import WebMap from "../Components/WebMap";
 import { useAuthContext } from "../context/AuthContext";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { useFeedContext } from "../context/FeedContext";
 
 const Post = () => {
   const { currentUser } = useAuthContext();
@@ -21,6 +22,7 @@ const Post = () => {
   // const [errors, setErrors] = useState("");
   const navigate = useNavigate();
 
+  const { setFeedData } = useFeedContext();
   console.log(formData);
   const [isChecked, setIsChecked] = React.useState(false); // state for trek/hike checkbox toggle...
   const [diffcult, setDiffcult] = React.useState("");
@@ -74,8 +76,8 @@ const Post = () => {
       lat: null,
       lng: null,
       transport: "",
-      restaurant: false,
-      lodging: false,
+      restaurant: "",
+      lodging: "",
       description: "",
       image_file: [],
     })
@@ -85,6 +87,7 @@ const Post = () => {
     event.preventDefault();
     
     const formPayload = new FormData();
+    // formPayload.append("uploader", currentUser.name);  // TODO: should be added to db schema...
     formPayload.append("location", formData.location);
     // formPayload.append("lat", formData.lat);
     // formPayload.append("lng", formData.lng);
@@ -93,7 +96,7 @@ const Post = () => {
     formPayload.append("lodging", formData.lodging === "HotelsAvailable" ? true : false);
     formPayload.append("difficuty", diffcult);
     formPayload.append("description", formData.description);
-    formPayload.append("transport", formData.transport);
+    formPayload.append("transportation", formData.transport);
     for (const image of formData.image_file) {
       formPayload.append("uploaded_images", image);
     }
@@ -103,8 +106,10 @@ const Post = () => {
     'Content-Type': 'multipart/form-data'
   }
   }).then(res => {
+    console.log("Successfully posted...");
     console.log(res);
     navigate('/');
+    setFeedData((prevData) => [...prevData, res.data]);
   }).catch(err => {
     console.log(err);
   });

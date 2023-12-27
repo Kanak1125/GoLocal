@@ -9,13 +9,14 @@ export function useFeedContext() {
 }
 
 export function FeedProvider({ children }) {
-    const [ result, fetchStatus ] = useApi('http://127.0.0.1:8000/api/post-create-list/');
+    const [ result, setResult, fetchStatus ] = useApi('http://127.0.0.1:8000/api/post-create-list/');
     
     console.log(result);
 
     return (
         <FeedContext.Provider value={{
             feedData: result,
+            setFeedData: setResult,
             fetchStatus: fetchStatus,
         }}>
             {fetchStatus !== "loading" && children}

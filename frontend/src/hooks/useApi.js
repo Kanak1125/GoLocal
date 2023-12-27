@@ -37,5 +37,5 @@ export function useApi(url) {
         return () => clearTimeout(timer);
     }, [url]);
 
-    return [result, fetchStatus];
+    return [result, setResult, fetchStatus];
 }

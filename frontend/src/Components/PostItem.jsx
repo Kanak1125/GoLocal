@@ -62,7 +62,7 @@ const PostItem = (props) => {
             </MySwiper>
           </div>
           <div className="md:w-[30%] p-7 md:p-5">
-            <WebMap height={'300px'}/>
+            <WebMap height={'300px'} currentData={itemData}/>
             <PostDetails />
           </div>
       </MyModal>
@@ -102,7 +102,7 @@ const PostItem = (props) => {
               <ul className="flex break-keep flex-wrap gap-4">
                 {itemData.lodging && <li className="py-2 px-4 secondary-color rounded-full ">Lodging</li>}
                 {itemData.restaurant && <li className="py-2 px-4 secondary-color rounded-full ">Resturants</li>}
-                {itemData.transportation && <li className="py-2 px-4 secondary-color rounded-full capitalize">{ itemData.transportation }</li>}
+                <li className="py-2 px-4 secondary-color rounded-full capitalize">{ itemData.transportation }</li>
               </ul>
             </div>
             <section className="reacts-section flex gap-5 my-5 mx-2">
