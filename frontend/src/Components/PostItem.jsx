@@ -8,10 +8,12 @@ import WebMap from "../Components/WebMap";
 import MyModal from "../Components/MyModal";
 import PostDetails from './PostDetails';
 import { SwiperSlide } from 'swiper/react';
+import { useNavigate } from 'react-router-dom';
 
 const PostItem = (props) => {
     const { itemData } = props;
     const [open, setOpen] = useState(false);
+    const navigate = useNavigate();
 
     function openModal() {
       setOpen(true);
@@ -48,6 +50,16 @@ const PostItem = (props) => {
         </SwiperSlide>
       )
     })
+
+    function handleLike() {
+      if (!currentUser) return navigate('/login');  // only allow user to interact with the post if they're logged in...
+      setLike(prevStatus => !prevStatus);
+    }
+
+    const handleCommentSection = () => {
+      if (!currentUser) return navigate('/login');  // same goes with comment section...
+      console.log("clicked...");
+    }
 
   return (
     <>
@@ -108,12 +120,12 @@ const PostItem = (props) => {
             <section className="reacts-section flex gap-5 my-5 mx-2">
             <div className='flex'>
               {like ? 
-                  <BsHeartFill size={24} className='text-red-500 cursor-pointer'  onClick={() => setLike(prevStatus => !prevStatus)}/> : 
-                  <BsHeart size={24} className='text-red-500 cursor-pointer' onClick={() => setLike(prevStatus => !prevStatus)}/>
+                  <BsHeartFill size={24} className='text-red-500 cursor-pointer'  onClick={handleLike}/> : 
+                  <BsHeart size={24} className='text-red-500 cursor-pointer' onClick={handleLike}/>
               }
                 <span className="cursor-pointer ml-2">45</span>
               </div>
-              <div className="flex">
+              <div className="flex" onClick={handleCommentSection}>
                 <FaRegComment size={24} className="cursor-pointer"/>
                 <span className="ml-2 cursor-pointer">12</span>
               </div>

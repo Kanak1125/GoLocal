@@ -10,8 +10,8 @@ const Post = () => {
   const { currentUser } = useAuthContext();
   const [formData, setFormData] = useState({
     location: "",
-    lat: null,
-    lng: null,
+    lat: 0, // initialized to zero if not set by the user...
+    lng: 0,
     transport: "",
     restaurant: "",
     lodging: "",
@@ -91,7 +91,8 @@ const Post = () => {
     formPayload.append("location", formData.location);
     // formPayload.append("lat", formData.lat);
     // formPayload.append("lng", formData.lng);
-    formPayload.append("coordinates", JSON.stringify([formData.lng, formData.lat]));
+    formPayload.append("lon", formData.lng);
+    formPayload.append("lat", formData.lat);  // storing the coordinates as lon, and lat separately in db...
     formPayload.append("restaurant", formData.restaurant === "RestaurantAvailable" ? true : false);
     formPayload.append("lodging", formData.lodging === "HotelsAvailable" ? true : false);
     formPayload.append("difficuty", diffcult);

@@ -5,7 +5,7 @@ const PrivateRoute2 = ({componentToRender}) => {
     const { currentUser } = useAuthContext();
 
     if (currentUser) {
-        return <Navigate to="/" />
+        return <Navigate to="/" replace={true}/>
     };
 
     return componentToRender
